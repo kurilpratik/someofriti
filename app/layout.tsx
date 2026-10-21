@@ -25,6 +25,13 @@ const ivyOraDisplay = localFont({
   fallback: ["Georgia", "serif"],
 });
 
+const degular = localFont({
+  src: "../public/fonts/Degular/Degular_Variable.otf",
+  variable: "--font-degular",
+  display: "swap",
+  fallback: ["Arial", "sans-serif"],
+});
+
 export const metadata: Metadata = {
   title: "someofriti | Riti Wig - Senior Graphic Designer & Illustrator",
   description:
@@ -33,8 +40,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${ivyOraDisplay.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-slate-100 text-slate-900">
+    <html
+      lang="en"
+      className={`${ivyOraDisplay.variable} ${degular.variable} h-full antialiased`}
+    >
+      <body className="flex min-h-full flex-col bg-slate-100 text-slate-900">
         {children}
       </body>
     </html>
