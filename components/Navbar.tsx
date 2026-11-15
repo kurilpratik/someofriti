@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import NavHeightSync from "@/components/NavHeightSync";
+
 const navItems = [
   { label: "Projects", href: "/#projects" },
   { label: "Connect", href: "/#connect" },
@@ -27,7 +29,11 @@ function handleSmoothAnchorClick(
 
 export default function Navbar() {
   return (
-    <header className="text-brand-ivory sticky top-0 z-50 w-full bg-black">
+    <header
+      data-site-header
+      className="text-brand-ivory sticky top-0 z-50 w-full bg-black"
+    >
+      <NavHeightSync />
       <nav
         aria-label="Main navigation"
         className="page-container flex items-center justify-between gap-6 py-6"

@@ -40,14 +40,14 @@ const LAYOUT: Record<string, Layout> = {
     phase: 0,
     size: 0.24,
   },
-  "stranger-things": {
+  "bira-netflix": {
     aspect: 509 / 509,
     grid: { col: 1, row: 0, colSpan: 1, rowSpan: 1 },
     ring: 1,
     phase: 0.12,
     size: 0.21,
   },
-  "strange-attractors": {
+  "nature-morte": {
     aspect: 524 / 734,
     grid: { col: 2, row: 0, colSpan: 2, rowSpan: 2 },
     ring: 0,
@@ -91,7 +91,11 @@ const LAYOUT: Record<string, Layout> = {
   },
 };
 
-const PROJECTS: Project[] = PROJECT_LIST.map((project) => ({
+// Only projects with an entry in LAYOUT get a tile, so a project can have a page
+// without being in the grid.
+const PROJECTS: Project[] = PROJECT_LIST.filter(
+  (project) => project.slug in LAYOUT,
+).map((project) => ({
   ...project,
   ...LAYOUT[project.slug],
 }));
@@ -323,10 +327,7 @@ export default function ProjectsAtAGlance() {
   });
 
   return (
-    <section
-      id="projects"
-      className="text-brand-ivory scroll-mt-20 bg-black py-20 sm:py-28"
-    >
+    <section id="projects" className="text-brand-ivory bg-black py-20 sm:py-28">
       {/* Same container as the navbar so both line up edge to edge. */}
       <div className="page-container">
         <header className="flex w-full flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">

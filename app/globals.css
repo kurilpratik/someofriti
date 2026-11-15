@@ -15,6 +15,13 @@
   --brand-white: #ffffff;
   --muted: #1c1c1c;
   --muted-foreground: #8f8882;
+  /*
+   * Navbar height (24px padding top and bottom plus the logo), used as the scroll
+   * offset below. Update these if the navbar padding or logo size changes.
+   */
+  --nav-height: 5rem;
+  /* Extra letter spacing for the Degular body font. */
+  --degular-tracking: 0.02em;
 }
 
 @theme inline {
@@ -45,8 +52,22 @@
   }
 } */
 
+@media (width >= 40rem) {
+  :root {
+    --nav-height: 5.5rem;
+  }
+}
+
+@media (width >= 64rem) {
+  :root {
+    --nav-height: 5.67rem;
+  }
+}
+
 html {
   scroll-behavior: smooth;
+  /* Keeps anchors and route changes from landing under the sticky navbar. */
+  scroll-padding-top: var(--nav-height);
 }
 
 html,
@@ -67,6 +88,24 @@ body {
 
 .hero-title {
   font-family: var(--font-degular);
+}
+
+/*
+ * Degular is the body font, so give it a touch of extra letter spacing. Ivy Ora
+ * (headings and anything using font-ivy-ora) keeps its natural spacing. This is
+ * in the base layer so Tailwind's tracking-* utilities still override it.
+ */
+@layer base {
+  body {
+    letter-spacing: var(--degular-tracking);
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-ivy-ora {
+    letter-spacing: normal;
+  }
 }
 
 h1,

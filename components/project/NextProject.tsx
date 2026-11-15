@@ -6,10 +6,19 @@ import { getNextProject } from "@/lib/projects";
 /** Closes every project page by linking to the next one in `lib/projects.ts`. */
 export default function NextProject({ slug }: { slug: string }) {
   const next = getNextProject(slug);
-  const media = next.cover ?? {
-    src: next.src,
-    alt: next.alt,
-  };
+  const { cover } = next;
+
+  // A video cover can't go in an <img>, so use its poster frame, and fall back to
+  // the glance image when there isn't one.
+  const stillSrc =
+    cover?.type === "image"
+      ? cover.src
+      : cover?.type === "video" && cover.poster
+        ? cover.poster
+        : undefined;
+  const media = stillSrc
+    ? { src: stillSrc, alt: cover!.alt, position: cover!.position }
+    : { src: next.src, alt: next.alt, position: undefined };
 
   return (
     <section className="text-brand-ivory bg-black">
@@ -41,6 +50,7 @@ export default function NextProject({ slug }: { slug: string }) {
               fill
               sizes="(max-width: 1800px) 100vw, 1800px"
               className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              style={{ objectPosition: media.position }}
             />
           </div>
         </Link>

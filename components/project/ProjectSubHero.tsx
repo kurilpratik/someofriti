@@ -42,7 +42,7 @@ export default function ProjectSubHero({
 
   return (
     <section className="text-brand-ivory bg-black">
-      <div className="page-container pt-8 pb-10 sm:pt-12 sm:pb-14">
+      <div className="page-container pt-12 pb-10 sm:pt-20 sm:pb-14 lg:pt-24">
         {/* The visible details carry no page title, so give screen readers one. */}
         <h1 className="sr-only">{title}</h1>
 
@@ -69,7 +69,7 @@ export default function ProjectSubHero({
         </dl>
       </div>
 
-      <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[8/3]">
+      <div className="relative aspect-[3/2] w-full overflow-hidden sm:aspect-[10/3]">
         {media.type === "video" ? (
           <video
             src={media.src}
@@ -80,6 +80,7 @@ export default function ProjectSubHero({
             loop
             playsInline
             className="absolute inset-0 size-full object-cover"
+            style={{ objectPosition: media.position }}
           />
         ) : (
           <Image
@@ -89,6 +90,7 @@ export default function ProjectSubHero({
             priority
             sizes="100vw"
             className="object-cover"
+            style={{ objectPosition: media.position }}
           />
         )}
       </div>
