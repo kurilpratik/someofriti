@@ -1,3 +1,5 @@
+"use client";
+
 export default function Hero() {
   return (
     <main className="text-brand-ivory flex min-h-screen items-center justify-center bg-black px-6 py-16">
@@ -17,7 +19,7 @@ export default function Hero() {
           }}
         />
 
-        <h1 className="hero-title text-brand-ivory max-w-[760px] text-center text-[clamp(1.05rem,2vw,1.4rem)] leading-[1.35] tracking-[0.035em]">
+        <h1 className="hero-title text-brand-ivory max-w-190 text-center text-[clamp(1.05rem,2vw,1.4rem)] leading-[1.35] tracking-[0.035em]">
           I&apos;m a designer working across identity,
           <br className="hidden sm:block" /> systems, and brand storytelling. My
           work sits between
@@ -47,7 +49,16 @@ export default function Hero() {
           </a>
 
           <a
-            href="#work"
+            href="#projects"
+            onClick={(event) => {
+              const target = document.getElementById("projects");
+
+              if (!target) return;
+
+              event.preventDefault();
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+              window.history.pushState(null, "", "#projects");
+            }}
             className="group hover:text-brand-ivory relative inline-flex min-h-18 min-w-47.5 items-center justify-center text-[0.8rem] font-medium tracking-[0.18em] text-[#554D4D] uppercase transition-colors sm:min-w-50"
           >
             <svg

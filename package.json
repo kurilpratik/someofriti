@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@sanity/image-url": "latest",
+    "clsx": "^2.1.1",
+    "motion": "^14.14.0",
     "next": "16.4.1",
     "next-sanity": "latest",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
