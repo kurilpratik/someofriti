@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navItems = [
-  { label: "Projects", href: "#projects" },
+  { label: "Projects", href: "/#projects" },
   { label: "Connect", href: "/#connect" },
   { label: "Hire", href: "/#hire" },
   { label: "Who is this?", href: "/#about" },
@@ -30,7 +30,7 @@ export default function Navbar() {
     <header className="text-brand-ivory sticky top-0 z-50 w-full bg-black">
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex w-full max-w-[1800px] items-center justify-between gap-6 px-6 py-6 sm:px-10 lg:px-14"
+        className="page-container flex items-center justify-between gap-6 py-6"
       >
         <Link href="/" aria-label="Home" className="inline-flex items-center">
           <Image

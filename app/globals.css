@@ -97,3 +97,31 @@ h3 {
   animation: hello-bob 1.2s ease-in-out infinite;
   will-change: transform;
 }
+
+/*
+ * Shared page container. The navbar, the glance section and the project pages
+ * all use it, so their left and right edges line up. Side spacing grows with
+ * the screen; change the values here to change it everywhere.
+ */
+@utility page-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1800px;
+  padding-inline: 1.5rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2.5rem;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: 5rem;
+  }
+
+  @media (width >= 80rem) {
+    padding-inline: 6rem;
+  }
+
+  @media (width >= 96rem) {
+    padding-inline: 8rem;
+  }
+}

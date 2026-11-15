@@ -170,7 +170,7 @@ export function RangeSlider({
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
       className={cn(
-        "relative flex h-10 w-full touch-none select-none items-center overflow-hidden rounded-lg bg-muted",
+        "bg-muted relative flex h-10 w-full touch-none items-center overflow-hidden rounded-lg select-none",
         disabled
           ? "pointer-events-none opacity-50"
           : "cursor-grab active:cursor-grabbing",
@@ -178,7 +178,7 @@ export function RangeSlider({
       )}
     >
       <motion.div
-        className="absolute inset-y-0 left-0 bg-foreground/15"
+        className="bg-foreground/15 absolute inset-y-0 left-0"
         style={{ width: left }}
       />
 
@@ -189,7 +189,7 @@ export function RangeSlider({
           return (
             <span
               key={t}
-              className="absolute top-1/2 size-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground/25"
+              className="bg-foreground/25 absolute top-1/2 size-1 -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{ left: `${tp}%` }}
             />
           );
@@ -207,7 +207,7 @@ export function RangeSlider({
         onKeyDown={onKeyDown}
         animate={reduce ? undefined : { scaleY: active ? 1.35 : 1 }}
         transition={SPRING_BOUNCY}
-        className="absolute top-1/2 h-5 w-1.5 rounded-sm bg-foreground shadow-sm outline-none ring-foreground/30 focus-visible:ring-4"
+        className="bg-foreground ring-foreground/30 absolute top-1/2 h-5 w-1.5 rounded-sm shadow-sm outline-none focus-visible:ring-4"
         style={{ left, x: thumbX, y: "-50%" }}
       />
     </div>

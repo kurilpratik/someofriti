@@ -328,7 +328,7 @@ export default function ProjectsAtAGlance() {
       className="text-brand-ivory scroll-mt-20 bg-black py-20 sm:py-28"
     >
       {/* Same container as the navbar so both line up edge to edge. */}
-      <div className="mx-auto w-full max-w-[1800px] px-6 sm:px-10 lg:px-14">
+      <div className="page-container">
         <header className="flex w-full flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="text-[clamp(2rem,4vw,3.4rem)] leading-[1.05] font-light tracking-tight">
             Projects at a glance
@@ -361,7 +361,7 @@ export default function ProjectsAtAGlance() {
                 src={project.src}
                 alt=""
                 fill
-                sizes="(max-width: 640px) 50vw, 40vw"
+                sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-cover"
               />
             </Link>
