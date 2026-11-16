@@ -21,7 +21,7 @@ export const SITE_DESCRIPTION =
 
 /** The image social platforms show when a link to the site is shared. */
 export const SHARE_IMAGE = {
-  url: "/images/about.webp",
+  url: "/images/about.jpg",
   width: 1561,
   height: 692,
   alt: `${AUTHOR_NAME} — senior graphic designer and illustrator based in ${LOCATION}`,
