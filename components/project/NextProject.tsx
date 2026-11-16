@@ -32,7 +32,7 @@ export default function NextProject({ slug }: { slug: string }) {
           </p>
 
           <div className="mt-5 flex items-end justify-between gap-6">
-            <h2 className="text-[clamp(2.2rem,6vw,5rem)] leading-[1.05] font-light tracking-tight">
+            <h2 className="text-[clamp(1.8rem,4vw,3.4rem)] leading-[1.08] font-light tracking-tight">
               {next.title}
             </h2>
             <span

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 
+import HangingGardens from "@/components/project/nature-morte/HangingGardens";
+import ManicuredInstall from "@/components/project/nature-morte/ManicuredInstall";
+import ManicuredTechniques from "@/components/project/nature-morte/ManicuredTechniques";
 import NextProject from "@/components/project/NextProject";
 import ProjectIntro from "@/components/project/ProjectIntro";
 import ProjectSubHero from "@/components/project/ProjectSubHero";
@@ -33,13 +36,11 @@ export default function NatureMortePage() {
         </p>
       </ProjectIntro>
 
-      {/*
-        Body, still to build (from the mockup):
-          1. White section — identity drawings and logo constructions, with a
-             small caption beside them and two short paragraphs of copy.
-          2. Black section — mosaic of installation photographs in mixed sizes.
-        Both sit in the same `page-container` as everything above.
-      */}
+      <HangingGardens />
+
+      <ManicuredTechniques />
+
+      <ManicuredInstall />
 
       <NextProject slug={project.slug} />
     </>
