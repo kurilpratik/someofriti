@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import NavHeightSync from "@/components/NavHeightSync";
 
@@ -32,6 +32,27 @@ function handleSmoothAnchorClick(
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuHeight, setMenuHeight] = useState(0);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  // The panel is absolutely positioned, so `fr` grid tracks can't size it.
+  // Measure the list instead and animate an exact max-height, which keeps the
+  // slide the same speed as the menu however many items it holds.
+  useEffect(() => {
+    const list = listRef.current;
+
+    if (!list) return;
+
+    const update = () => setMenuHeight(list.scrollHeight);
+
+    update();
+
+    const observer = new ResizeObserver(update);
+
+    observer.observe(list);
+
+    return () => observer.disconnect();
+  }, []);
 
   // Close on Escape, and whenever the viewport grows past the mobile
   // breakpoint so the panel can't stay open behind the desktop links.
@@ -121,20 +142,22 @@ export default function Navbar() {
       </nav>
 
       {/*
-        Slide-down panel. It sits absolutely under the nav so the sticky
-        header keeps its height (and `--nav-height` stays correct) while open.
-        The 0fr -> 1fr grid row is what animates the auto height.
+        Slide-down panel. It sits absolutely under the nav so the sticky header
+        keeps its height (and `--nav-height` stays correct) while the menu is
+        open, and the page below is never pushed down.
       */}
       <div
         id={MENU_ID}
         inert={!isMenuOpen}
-        className={`absolute inset-x-0 top-full grid overflow-hidden bg-black transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none md:hidden ${
-          isMenuOpen
-            ? "grid-rows-[1fr] opacity-100"
-            : "pointer-events-none grid-rows-[0fr] opacity-0"
+        style={{ maxHeight: isMenuOpen ? menuHeight : 0 }}
+        className={`absolute inset-x-0 top-full overflow-hidden bg-black transition-[max-height,opacity] duration-300 ease-out motion-reduce:transition-none md:hidden ${
+          isMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <ul className="page-container min-h-0 space-y-4 overflow-hidden pt-2 pb-6 text-[0.8rem] font-medium tracking-[0.2em] text-[#f5f1ea]/85 uppercase">
+        <ul
+          ref={listRef}
+          className="page-container space-y-4 pb-7 text-[0.8rem] font-medium tracking-[0.2em] text-[#f5f1ea]/85 uppercase"
+        >
           {navItems.map((item) => (
             <li key={item.label}>
               <Link

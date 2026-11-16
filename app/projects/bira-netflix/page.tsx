@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import StreamFestShows from "@/components/project/bira-netflix/StreamFestShows";
+import TaproomSocials from "@/components/project/bira-netflix/TaproomSocials";
 import NextProject from "@/components/project/NextProject";
 import ProjectIntro from "@/components/project/ProjectIntro";
 import ProjectSubHero from "@/components/project/ProjectSubHero";
@@ -42,14 +44,9 @@ export default function BiraNetflixPage() {
         </p>
       </ProjectIntro>
 
-      {/*
-        Body, still to build (from the mockup):
-          1. Black section — a small 2x2 grid of dark creatives beside a row of
-             phone mockups.
-          2. Red section — grid of illustrated show posters, then a row of
-             character illustrations on light tiles.
-        Both sit in the same `page-container` as everything above.
-      */}
+      <TaproomSocials />
+
+      <StreamFestShows />
 
       <NextProject slug={project.slug} />
     </>
