@@ -7,12 +7,17 @@ import NextProject from "@/components/project/NextProject";
 import ProjectIntro from "@/components/project/ProjectIntro";
 import ProjectSubHero from "@/components/project/ProjectSubHero";
 import { requireProject } from "@/lib/projects";
+import { pageMetadata } from "@/lib/site";
 
 const project = requireProject("nature-morte");
 
-export const metadata: Metadata = {
-  title: `${project.title} | someofriti`,
-};
+export const metadata: Metadata = pageMetadata({
+  title: project.title,
+  description:
+    "Exhibition identities for Nature Morte — books, posters, spatial graphics and digital collateral that give each show its own language within one gallery voice.",
+  path: `/projects/${project.slug}`,
+  type: "article",
+});
 
 export default function NatureMortePage() {
   return (

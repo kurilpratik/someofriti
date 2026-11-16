@@ -1,5 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+
+import {
+  AUTHOR_NAME,
+  SHARE_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/site";
+
 import "./globals.css";
 
 const ivyOraDisplay = localFont({
@@ -33,9 +43,66 @@ const degular = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "someofriti | Riti Wig - Senior Graphic Designer & Illustrator",
-  description:
-    "Riti Wig is a senior graphic designer and illustrator based in New Delhi, India. She specializes in creating visually compelling designs that communicate complex ideas with clarity and impact.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    // Child pages set a bare title, e.g. "Nature Morte" -> "Nature Morte | someofriti".
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: AUTHOR_NAME, url: SITE_URL }],
+  creator: AUTHOR_NAME,
+  publisher: AUTHOR_NAME,
+  category: "design",
+  keywords: [
+    "Riti Wig",
+    "someofriti",
+    "senior graphic designer",
+    "graphic designer Delhi",
+    "graphic designer New Delhi",
+    "illustrator India",
+    "brand identity designer",
+    "visual identity",
+    "art direction",
+    "exhibition design",
+    "campaign design",
+    "design portfolio",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: SITE_NAME,
+    locale: "en_IN",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [SHARE_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [SHARE_IMAGE.url],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  formatDetection: { telephone: false, address: false, email: false },
+};
+
+export const viewport: Viewport = {
+  // Matches the body background, so mobile browser chrome blends in.
+  themeColor: "#f1f5f9",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

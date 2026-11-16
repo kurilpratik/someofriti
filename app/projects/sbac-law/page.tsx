@@ -4,12 +4,17 @@ import NextProject from "@/components/project/NextProject";
 import ProjectIntro from "@/components/project/ProjectIntro";
 import ProjectSubHero from "@/components/project/ProjectSubHero";
 import { requireProject } from "@/lib/projects";
+import { pageMetadata } from "@/lib/site";
 
 const project = requireProject("sbac-law");
 
-export const metadata: Metadata = {
-  title: `${project.title} | someofriti`,
-};
+export const metadata: Metadata = pageMetadata({
+  title: project.title,
+  description:
+    "A brand identity for SBAC Law that leaves legal cliché behind — a logo system, palette and typographic framework drawn from molten lava, ice and fluid motion.",
+  path: `/projects/${project.slug}`,
+  type: "article",
+});
 
 export default function SbacLawPage() {
   return (

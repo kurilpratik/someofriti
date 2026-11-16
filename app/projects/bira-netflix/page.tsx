@@ -6,12 +6,17 @@ import NextProject from "@/components/project/NextProject";
 import ProjectIntro from "@/components/project/ProjectIntro";
 import ProjectSubHero from "@/components/project/ProjectSubHero";
 import { requireProject } from "@/lib/projects";
+import { pageMetadata } from "@/lib/site";
 
 const project = requireProject("bira-netflix");
 
-export const metadata: Metadata = {
-  title: `${project.title} | someofriti`,
-};
+export const metadata: Metadata = pageMetadata({
+  title: project.title,
+  description:
+    "Illustration and campaign work for the Bira x Netflix StreamFest collaboration, plus retainer design across Bira's brand releases and its first Bangalore brewery.",
+  path: `/projects/${project.slug}`,
+  type: "article",
+});
 
 export default function BiraNetflixPage() {
   return (

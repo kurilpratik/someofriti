@@ -6,6 +6,7 @@ import NextProject from "@/components/project/NextProject";
 import ProjectIntro from "@/components/project/ProjectIntro";
 import ProjectSubHero from "@/components/project/ProjectSubHero";
 import { requireProject } from "@/lib/projects";
+import { pageMetadata } from "@/lib/site";
 
 /**
  * A hand-coded project page. Copy this folder to start another one:
@@ -16,9 +17,13 @@ import { requireProject } from "@/lib/projects";
 
 const project = requireProject("bangalore-art-weekend");
 
-export const metadata: Metadata = {
-  title: `${project.title} | someofriti`,
-};
+export const metadata: Metadata = pageMetadata({
+  title: project.title,
+  description:
+    "Festival identity for Bangalore Art Weekend and its Delhi edition — panels, posters, menus, social media and printed collateral, designed by Riti Wig at CORE Experience.",
+  path: `/projects/${project.slug}`,
+  type: "article",
+});
 
 export default function BangaloreArtWeekendPage() {
   return (
