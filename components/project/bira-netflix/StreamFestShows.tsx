@@ -30,12 +30,16 @@ const ROWS = [
 export default function StreamFestShows() {
   return (
     <section className="bg-brand-primary text-white">
-      <div className="page-container py-16 sm:py-24 lg:py-28">
+      <div className="page-container @container py-16 sm:py-24 lg:py-28">
         <h2 className="sr-only">
           Bira 91 × Netflix StreamFest — show artwork and character studies
         </h2>
 
-        <ul className="grid gap-y-10 sm:gap-y-14 lg:gap-y-16">
+        {/* The collab row carries ~10% of its own height as red padding below
+            the tiles, so the gap set here is the deck's spacing less that. It
+            is read off the container's width, which the rows scale with, so the
+            spacing holds at every size. */}
+        <ul className="grid gap-y-[3.6cqw]">
           {ROWS.map((row) => (
             <li key={row.src}>
               <Image

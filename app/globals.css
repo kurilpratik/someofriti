@@ -143,24 +143,51 @@ h3 {
  * the screen; change the values here to change it everywhere.
  */
 @utility page-container {
+  /*
+   * The width cap and the side spacing live in variables so descendants can
+   * read them back and cancel them — see `bleed-right` below.
+   */
+  --page-max: 1800px;
+  --page-gutter: 1.5rem;
   margin-inline: auto;
   width: 100%;
-  max-width: 1800px;
-  padding-inline: 1.5rem;
+  max-width: var(--page-max);
+  padding-inline: var(--page-gutter);
 
   @media (width >= 40rem) {
-    padding-inline: 2.5rem;
+    --page-gutter: 2.5rem;
   }
 
   @media (width >= 64rem) {
-    padding-inline: 5rem;
+    --page-gutter: 5rem;
   }
 
   @media (width >= 80rem) {
-    padding-inline: 6rem;
+    --page-gutter: 6rem;
   }
 
   @media (width >= 96rem) {
-    padding-inline: 8rem;
+    --page-gutter: 8rem;
   }
+}
+
+/*
+ * Runs an element inside `page-container` out to the right edge of the screen.
+ * It cancels the container's side spacing, plus the half-gap the centred
+ * container leaves over once the viewport is wider than `--page-max`.
+ *
+ * `100vw` counts the scrollbar, so on a wide window this can overshoot by a few
+ * pixels — give the section around it `overflow-x: clip` (Tailwind's
+ * `overflow-x-clip`) and the overshoot is trimmed at the screen edge instead of
+ * adding a horizontal scrollbar. `clip` is deliberate: `hidden` would stop the
+ * sticky navbar from sticking.
+ */
+@utility bleed-right {
+  margin-right: calc(
+    -1 *
+      (
+        var(--page-gutter, 0px) +
+          max(0px, (100vw - var(--page-max, 1800px)) / 2)
+      )
+  );
 }

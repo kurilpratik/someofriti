@@ -10,7 +10,7 @@ const navItems = [
   { label: "Projects", href: "/#projects" },
   { label: "Connect", href: "/#connect" },
   { label: "Hire", href: "/#hire" },
-  { label: "Who is this?", href: "/#about" },
+  { label: "Who is this?", href: "/about" },
 ];
 
 const MENU_ID = "mobile-nav-menu";

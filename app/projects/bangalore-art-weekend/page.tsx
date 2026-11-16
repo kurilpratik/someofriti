@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import DelhiEdition from "@/components/project/bangalore-art-weekend/DelhiEdition";
+import FestivalCollateral from "@/components/project/bangalore-art-weekend/FestivalCollateral";
 import NextProject from "@/components/project/NextProject";
 import ProjectIntro from "@/components/project/ProjectIntro";
 import ProjectSubHero from "@/components/project/ProjectSubHero";
@@ -48,6 +50,10 @@ export default function BangaloreArtWeekendPage() {
       </ProjectIntro>
 
       {/* Everything below is bespoke to this project: any layout, any markup. */}
+
+      <FestivalCollateral />
+
+      <DelhiEdition />
 
       <NextProject slug={project.slug} />
     </>

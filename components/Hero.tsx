@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Hero() {
   return (
     <main className="text-brand-ivory flex min-h-screen items-center justify-center bg-black px-6 py-16">
@@ -30,8 +32,8 @@ export default function Hero() {
           aria-label="Explore"
           className="mt-9 flex items-center gap-5 sm:gap-16"
         >
-          <a
-            href="#about"
+          <Link
+            href="/about"
             className="group hover:text-brand-ivory relative inline-flex min-h-18 min-w-47.5 items-center justify-center text-[0.8rem] font-medium tracking-[0.18em] text-[#554D4D] uppercase transition-colors sm:min-w-50"
           >
             <svg
@@ -46,7 +48,7 @@ export default function Hero() {
               <path d="M53 66c24 3 54 6 93 8" strokeLinecap="round" />
             </svg>
             <span className="relative">Know more?</span>
-          </a>
+          </Link>
 
           <a
             href="#projects"
