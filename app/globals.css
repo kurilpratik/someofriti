@@ -147,7 +147,7 @@ h3 {
    * The width cap and the side spacing live in variables so descendants can
    * read them back and cancel them — see `bleed-right` below.
    */
-  --page-max: 1800px;
+  --page-max: 1600px;
   --page-gutter: 1.5rem;
   margin-inline: auto;
   width: 100%;
@@ -159,15 +159,15 @@ h3 {
   }
 
   @media (width >= 64rem) {
-    --page-gutter: 5rem;
-  }
-
-  @media (width >= 80rem) {
     --page-gutter: 6rem;
   }
 
+  @media (width >= 80rem) {
+    --page-gutter: 9rem;
+  }
+
   @media (width >= 96rem) {
-    --page-gutter: 8rem;
+    --page-gutter: 11rem;
   }
 }
 
@@ -187,7 +187,7 @@ h3 {
     -1 *
       (
         var(--page-gutter, 0px) +
-          max(0px, (100vw - var(--page-max, 1800px)) / 2)
+          max(0px, (100vw - var(--page-max, 1600px)) / 2)
       )
   );
 }

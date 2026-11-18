@@ -334,9 +334,6 @@ export default function ProjectsAtAGlance() {
           <h2 className="text-[clamp(2rem,4vw,3.4rem)] leading-[1.05] font-light tracking-tight">
             Projects at a glance
           </h2>
-          <p className="text-muted-foreground max-w-xs text-[0.85rem] leading-relaxed">
-            Control the slider to go from structure to creative!
-          </p>
         </header>
 
         <div
@@ -369,7 +366,7 @@ export default function ProjectsAtAGlance() {
           ))}
         </div>
 
-        <div className="mx-auto mt-12 flex w-full max-w-md flex-col gap-4 sm:mt-16">
+        <div className="mx-auto mt-12 flex w-full max-w-146 flex-col gap-4 sm:mt-16">
           <div className="flex items-center justify-between text-[0.72rem] font-medium tracking-[0.22em] uppercase">
             <span
               className={
@@ -396,8 +393,12 @@ export default function ProjectsAtAGlance() {
             onValueChange={handleChange}
             step={5}
             aria-label="Shift the projects from structure to creative"
-            className="[&_[role=slider]]:bg-brand-primary [&_[role=slider]]:ring-brand-primary/30 [&>div:first-of-type]:bg-brand-primary/45"
+            className="**:[[role=slider]]:bg-brand-primary **:[[role=slider]]:ring-brand-primary/30 [&>div:first-of-type]:bg-brand-primary/45 h-9 **:[[role=slider]]:h-4.5"
           />
+
+          <p className="text-muted-foreground text-center text-[0.85rem] leading-relaxed">
+            Control the slider to go from structure to creative!
+          </p>
         </div>
       </div>
     </section>

@@ -14,7 +14,7 @@ export const AUTHOR_NAME = "Riti Wig";
 export const AUTHOR_ROLE = "Senior Graphic Designer & Illustrator";
 export const LOCATION = "New Delhi, India";
 
-export const SITE_TITLE = `${SITE_NAME} — ${AUTHOR_NAME}, Senior Graphic Designer in New Delhi`;
+export const SITE_TITLE = `${SITE_NAME} - ${AUTHOR_NAME}, Senior Graphic Designer in New Delhi`;
 
 export const SITE_DESCRIPTION =
   "Riti Wig is a senior graphic designer and illustrator in New Delhi — brand identity, campaigns, print and exhibition design for culture, luxury and lifestyle brands.";
