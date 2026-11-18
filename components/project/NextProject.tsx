@@ -20,6 +20,10 @@ export default function NextProject({ slug }: { slug: string }) {
     ? { src: stillSrc, alt: cover!.alt, position: cover!.position }
     : { src: next.src, alt: next.alt, position: undefined };
 
+  // With no still anywhere — a video cover without a poster, over a video glance
+  // tile — play the clip itself rather than feed an <img> an .mp4.
+  const isVideo = !stillSrc && next.srcType === "video";
+
   return (
     <section className="text-brand-ivory bg-black">
       <div className="page-container py-20 sm:py-28">
@@ -44,14 +48,28 @@ export default function NextProject({ slug }: { slug: string }) {
           </div>
 
           <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden sm:aspect-[21/8]">
-            <Image
-              src={media.src}
-              alt={media.alt}
-              fill
-              sizes="(max-width: 1800px) 100vw, 1800px"
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-              style={{ objectPosition: media.position }}
-            />
+            {isVideo ? (
+              <video
+                src={media.src}
+                aria-label={media.alt}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                style={{ objectPosition: media.position }}
+              />
+            ) : (
+              <Image
+                src={media.src}
+                alt={media.alt}
+                fill
+                sizes="(max-width: 1800px) 100vw, 1800px"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                style={{ objectPosition: media.position }}
+              />
+            )}
           </div>
         </Link>
       </div>

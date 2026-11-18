@@ -19,6 +19,11 @@ export type ProjectSummary = {
   alt: string;
   /** Image shown in "Projects at a glance". */
   src: string;
+  /**
+   * Set when `src` is a video file, so the glance tile renders a looping
+   * `<video>` instead of an `<Image>`.
+   */
+  srcType?: "video";
   /** Sub-hero details. Anything left out is simply not rendered. */
   client?: string;
   /** Year the work was done. */
@@ -36,28 +41,6 @@ export type ProjectSummary = {
  * Add `client`, `year`, `workTypes` and `cover` as each page gets built.
  */
 export const PROJECTS: ProjectSummary[] = [
-  {
-    slug: "wallis",
-    title: "Wallis",
-    alt: "Wallis identity — business cards held in hand",
-    src: "/images/glance/Asset 6@4x.webp",
-  },
-  {
-    slug: "bira-netflix",
-    title: "Bira + Netflix",
-    alt: "Stranger Things character illustration",
-    src: "/images/glance/Asset 7@4x.webp",
-    client: "Bira + Netflix",
-    workTypes: ["Campaign", "Print", "Illustration", "Social Media"],
-    year: 2021,
-    cover: {
-      type: "video",
-      src: "/images/projects/netflix/bira+netflix.mp4",
-      poster: "", // optional
-      alt: "Nature Morte — Strange Attractors exhibition poster for Bharti Kher",
-      position: "50% 50%",
-    },
-  },
   {
     slug: "nature-morte",
     title: "Nature Morte",
@@ -77,6 +60,35 @@ export const PROJECTS: ProjectSummary[] = [
       poster: "/images/projects/nature/nature-cover-img.webp", // optional
       alt: "Nature Morte — Strange Attractors exhibition poster for Bharti Kher",
       position: "50% 44%", // keeps the gold sphere vertically centred
+    },
+  },
+  {
+    slug: "bira-netflix",
+    title: "Bira + Netflix",
+    alt: "Stranger Things character illustration",
+    src: "/images/glance/eleven_levitation_loop.gif",
+    client: "Bira + Netflix",
+    workTypes: ["Campaign", "Print", "Illustration", "Social Media"],
+    year: 2021,
+    cover: {
+      type: "video",
+      src: "/images/projects/netflix/bira+netflix.mp4",
+      poster: "", // optional
+      alt: "Nature Morte — Strange Attractors exhibition poster for Bharti Kher",
+      position: "50% 50%",
+    },
+  },
+  {
+    slug: "regalium",
+    title: "Regalium",
+    alt: "Regalium — leather bags film",
+    src: "/images/glance/regalium.mp4",
+    srcType: "video",
+    cover: {
+      type: "video",
+      src: "/images/glance/regalium.mp4",
+      alt: "Regalium — leather bags film",
+      position: "50% 50%",
     },
   },
   {
@@ -117,16 +129,22 @@ export const PROJECTS: ProjectSummary[] = [
     src: "/images/glance/Asset 10@4x.webp",
   },
   {
-    slug: "markers-of-time-and-space",
-    title: "Markers of Time & Space",
-    alt: "Markers of Time and Space — textile artwork",
-    src: "/images/glance/Asset 11@4x.webp",
-  },
-  {
     slug: "tanabana",
     title: "Saad Qureshi — Tanabana",
     alt: "Saad Qureshi — Tanabana exhibition poster",
     src: "/images/glance/Asset 12@4x.webp",
+  },
+  {
+    slug: "wallis",
+    title: "Wallis",
+    alt: "Wallis identity — business cards held in hand",
+    src: "/images/glance/Asset 6@4x.webp",
+  },
+  {
+    slug: "markers-of-time-and-space",
+    title: "Markers of Time & Space",
+    alt: "Markers of Time and Space — textile artwork",
+    src: "/images/glance/Asset 11@4x.webp",
   },
 ];
 

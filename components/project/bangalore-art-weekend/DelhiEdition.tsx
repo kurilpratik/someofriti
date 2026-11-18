@@ -14,40 +14,40 @@ export default function DelhiEdition() {
       <div className="page-container @container pt-4 pb-16 sm:pb-24 lg:pb-28">
         <h2 className="sr-only">Bangalore Art Weekend — the Delhi edition</h2>
 
-        <Image
-          src={`${BASE}/Asset 22@4x.webp`}
-          width={1887}
-          height={1167}
-          alt="The festival poster set — eighteen posters in the identity's red and blue duotone, covering venues (Sabha, General Items, Form & Flow Studio, Kaash), workshops on journal comics and zine-making, speaker cards for Vinay Shukla, Deepak Kathait and Pragya Bhagat, the schedule announcement, a panel discussion on filmmaking, and the full line-up of names"
-          sizes="100vw"
-          className="h-auto w-full"
-        />
+        <div className="lg:px-[5%] xl:px-[8%]">
+          <Image
+            src={`${BASE}/Asset 22@4x.webp`}
+            width={1887}
+            height={1167}
+            alt="The festival poster set — eighteen posters in the identity's red and blue duotone, covering venues (Sabha, General Items, Form & Flow Studio, Kaash), workshops on journal comics and zine-making, speaker cards for Vinay Shukla, Deepak Kathait and Pragya Bhagat, the schedule announcement, a panel discussion on filmmaking, and the full line-up of names"
+            sizes="100vw"
+            className="h-auto w-full"
+          />
 
-        <div className="mt-16 grid gap-y-8 sm:mt-20 lg:mt-28 lg:grid-cols-[32%_59%] lg:justify-between lg:gap-y-0">
-          {/* The deck breaks this line in three; keeping the breaks explicit
-              rather than letting it wrap, so the shape holds at every width. */}
-          <p
-            aria-hidden="true"
-            className="font-ivy-ora text-[clamp(2.75rem,8.5vw,7.5rem)] leading-[1.05] font-light italic"
-          >
-            For
-            <br />
-            the Delhi
-            <br />
-            edition
-          </p>
-
-          {/* Capped at a 52-character measure, then pushed to the end of its
-              column so the copy's right edge lands on the poster grid's. */}
-          <div className="self-center text-[1rem] leading-[1.8] tracking-[0.04em] text-pretty sm:text-[1.05rem] lg:ml-auto lg:max-w-[52ch] lg:text-[1.15rem] xl:text-[1.25rem]">
-            <p>
-              <span className="sr-only">For the Delhi edition: </span>I led the
-              design of the main posters, adapting the existing visual identity
-              to a new city while maintaining continuity with the overall
-              system. The project reflects an approach I value — working within
-              established frameworks while allowing enough flexibility for the
-              identity to evolve and respond to new contexts.
+          <div className="mt-16 grid gap-y-8 sm:mt-20 lg:mt-28 lg:grid-cols-[32%_59%] lg:justify-between lg:gap-y-0">
+            {/* The deck breaks this line in three; keeping the breaks explicit
+                rather than letting it wrap, so the shape holds at every width. */}
+            <p
+              aria-hidden="true"
+              className="font-ivy-ora text-[clamp(2.75rem,7.25vw,6.5rem)] leading-[1.05] font-light italic"
+            >
+              <span className="block whitespace-nowrap">For</span>
+              <span className="block whitespace-nowrap">the Delhi</span>
+              <span className="block whitespace-nowrap">edition</span>
             </p>
+
+            {/* Capped at a 52-character measure, then pushed to the end of its
+                column so the copy's right edge lands on the poster grid's. */}
+            <div className="self-center text-[1rem] leading-[1.8] tracking-[0.04em] text-pretty sm:text-[1.05rem] lg:ml-auto lg:max-w-[52ch] lg:text-[1.15rem] xl:text-[1.25rem]">
+              <p>
+                <span className="sr-only">For the Delhi edition: </span>I led the
+                design of the main posters, adapting the existing visual identity
+                to a new city while maintaining continuity with the overall
+                system. The project reflects an approach I value — working within
+                established frameworks while allowing enough flexibility for the
+                identity to evolve and respond to new contexts.
+              </p>
+            </div>
           </div>
         </div>
 

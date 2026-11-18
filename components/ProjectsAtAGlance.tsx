@@ -33,12 +33,12 @@ type Layout = Pick<Project, "aspect" | "grid" | "ring" | "phase" | "size">;
 
 /** How each project sits in the grid and on the orbit, keyed by slug. */
 const LAYOUT: Record<string, Layout> = {
-  wallis: {
-    aspect: 503 / 550,
+  "nature-morte": {
+    aspect: 524 / 734,
     grid: { col: 0, row: 0, colSpan: 1, rowSpan: 1 },
     ring: 0,
-    phase: 0,
-    size: 0.24,
+    phase: 0.25,
+    size: 0.3,
   },
   "bira-netflix": {
     aspect: 509 / 509,
@@ -47,11 +47,11 @@ const LAYOUT: Record<string, Layout> = {
     phase: 0.12,
     size: 0.21,
   },
-  "nature-morte": {
-    aspect: 524 / 734,
+  regalium: {
+    aspect: 2048 / 1536,
     grid: { col: 2, row: 0, colSpan: 2, rowSpan: 2 },
-    ring: 0,
-    phase: 0.25,
+    ring: 1,
+    phase: 0.88,
     size: 0.3,
   },
   "sbac-law": {
@@ -75,19 +75,19 @@ const LAYOUT: Record<string, Layout> = {
     phase: 0.63,
     size: 0.18,
   },
-  "markers-of-time-and-space": {
-    aspect: 417 / 733,
+  tanabana: {
+    aspect: 489 / 733,
     grid: { col: 2, row: 2, colSpan: 1, rowSpan: 1 },
     ring: 0,
     phase: 0.75,
-    size: 0.28,
-  },
-  tanabana: {
-    aspect: 489 / 733,
-    grid: { col: 3, row: 2, colSpan: 1, rowSpan: 1 },
-    ring: 1,
-    phase: 0.88,
     size: 0.27,
+  },
+  wallis: {
+    aspect: 503 / 550,
+    grid: { col: 3, row: 2, colSpan: 1, rowSpan: 1 },
+    ring: 0,
+    phase: 0,
+    size: 0.24,
   },
 };
 
@@ -355,13 +355,26 @@ export default function ProjectsAtAGlance() {
                 height: "33%",
               }}
             >
-              <Image
-                src={project.src}
-                alt=""
-                fill
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                className="object-cover"
-              />
+              {project.srcType === "video" ? (
+                <video
+                  src={project.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-hidden="true"
+                  className="absolute inset-0 size-full object-cover"
+                />
+              ) : (
+                <Image
+                  src={project.src}
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover"
+                />
+              )}
             </Link>
           ))}
         </div>
