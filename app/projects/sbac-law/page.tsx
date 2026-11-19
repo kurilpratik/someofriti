@@ -89,6 +89,46 @@ export default function SbacLawPage() {
         </div>
       </section>
 
+      <section className="text-brand-ivory bg-black">
+        <div className="page-container py-16 sm:py-20 lg:py-28">
+          <p className="font-ivy-ora w-full text-[clamp(1.25rem,2.6vw,2.25rem)] leading-[1.25] font-light text-pretty italic">
+            Nature inspired textures such as lava and ice introduced depth and
+            contrast, reinforcing SBAC’s balance of strength and precision. The
+            result is a bold, grounded system that moves confidently across
+            formats without leaning on traditional legal symbolism.
+          </p>
+
+          <div className="mt-12 flex flex-col gap-8 sm:mt-16 lg:relative lg:mt-24 lg:block lg:aspect-[539/358] lg:gap-0">
+            <Image
+              src="/images/projects/sbac/Asset 16.webp"
+              alt="SBAC Law brand applications in teal and burgundy, with ice and lava textures"
+              width={1144}
+              height={1052}
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              className="h-auto w-full lg:absolute lg:top-[14.2%] lg:left-0 lg:z-10 lg:w-[52.1%]"
+            />
+            <Image
+              src="/images/projects/sbac/sbac-web.png"
+              alt="SBAC Law website home page with a water-ripple hero image"
+              width={1920}
+              height={1304}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="h-auto w-full lg:absolute lg:top-0 lg:right-0 lg:w-[49.9%]"
+            />
+            <div className="relative aspect-[1161/550] w-full overflow-hidden lg:absolute lg:top-[53%] lg:right-0 lg:w-[50.5%]">
+              <Image
+                src="/images/projects/sbac/sbac-team.png"
+                alt="SBAC Law website team page with partner and associate portraits"
+                width={1920}
+                height={817}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="absolute top-[-29.1%] left-[-7.7%] h-auto w-[165.4%] max-w-none"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <NextProject slug={project.slug} />
     </>
   );
