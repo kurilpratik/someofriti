@@ -61,35 +61,37 @@ export default function ManicuredTechniques() {
           both precise and flexible.
         </p>
 
-        <ul className="mt-14 grid grid-cols-1 items-start gap-x-10 gap-y-14 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-x-16">
-          {TOP_ROW.map((study) => (
-            <li key={study.src}>
-              <Image
-                src={study.src}
-                width={study.width}
-                height={study.height}
-                alt={study.alt}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="h-auto w-full"
-              />
-            </li>
-          ))}
-        </ul>
+        <div className="mx-auto lg:w-[82%]">
+          <ul className="mt-14 grid grid-cols-1 items-start gap-x-10 gap-y-14 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-x-12">
+            {TOP_ROW.map((study) => (
+              <li key={study.src}>
+                <Image
+                  src={study.src}
+                  width={study.width}
+                  height={study.height}
+                  alt={study.alt}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="h-auto w-full"
+                />
+              </li>
+            ))}
+          </ul>
 
-        <ul className="mt-16 grid grid-cols-1 items-end gap-x-10 gap-y-14 lg:mt-24 lg:grid-cols-2 lg:gap-x-16">
-          {BOTTOM_ROW.map((study) => (
-            <li key={study.src}>
-              <Image
-                src={study.src}
-                width={study.width}
-                height={study.height}
-                alt={study.alt}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="h-auto w-full"
-              />
-            </li>
-          ))}
-        </ul>
+          <ul className="mt-16 grid grid-cols-1 items-end gap-x-10 gap-y-14 lg:mt-24 lg:grid-cols-2 lg:gap-x-12">
+            {BOTTOM_ROW.map((study) => (
+              <li key={study.src}>
+                <Image
+                  src={study.src}
+                  width={study.width}
+                  height={study.height}
+                  alt={study.alt}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="h-auto w-full"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {/* Closing copy. One run of text that splits into two balanced columns
             on large screens, the way the intro under the sub-hero does. */}

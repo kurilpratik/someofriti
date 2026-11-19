@@ -31,7 +31,8 @@ const TILES = [
 /** Copy that sits beside the film. The second half is hidden behind "know more". */
 const LEAD =
   "For Hanging Gardens, the identity evolved through layered forms and shifting compositions, inspired by textile structures and organic growth patterns. The visual language was designed to ";
-const REST = "to feel in motion — adapting across formats while retaining a clear, recognisable core. The process explored balance between structure and fluidity, allowing the exhibition identity to grow organically from concept to final execution.";
+const REST =
+  "to feel in motion — adapting across formats while retaining a clear, recognisable core. The process explored balance between structure and fluidity, allowing the exhibition identity to grow organically from concept to final execution.";
 
 /**
  * Same hand-drawn mark the hero links use — a loose ellipse with a tail under
@@ -68,7 +69,7 @@ export default function HangingGardens() {
       <div className="page-container py-16 sm:py-24 lg:py-28">
         <h2 className="sr-only">Hanging Gardens — identity studies</h2>
 
-        <div className="grid grid-cols-1 items-start gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-16 lg:gap-y-16">
+        <div className="mx-auto grid grid-cols-1 items-start gap-x-10 gap-y-12 sm:grid-cols-2 lg:w-[82%] lg:grid-cols-3 lg:gap-x-12 lg:gap-y-14">
           {TILES.slice(0, 3).map((tile) => (
             <Tile key={tile.src} {...tile} />
           ))}
