@@ -397,7 +397,7 @@ export default function ProjectsAtAGlance() {
                   : "text-muted-foreground transition-colors duration-300"
               }
             >
-              Creative
+              Fluid
             </span>
           </div>
 

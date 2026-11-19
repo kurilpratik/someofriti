@@ -48,13 +48,15 @@ export default function SbacLawPage() {
           <h2 className="sr-only">
             SBAC Law brand guidelines — typography, colour and logo
           </h2>
+          {/* 6000px q95 JPEG served as-is (`unoptimized`): the guideline
+              pages carry small type, which Next's default quality-75 re-encode blurs. */}
           <Image
-            src="/images/projects/sbac/Asset 13.png"
+            src="/images/projects/sbac/sbac-brand.jpg"
             alt="Brand guideline pages for SBAC Law showing the Aviano typeface, colour theory palette and logo construction"
-            width={4000}
-            height={4000}
-            sizes="(min-width: 1024px) 60vw, 100vw"
-            className="mx-auto h-auto w-full max-w-4xl"
+            width={6000}
+            height={7757}
+            unoptimized
+            className="mx-auto h-auto w-full max-w-5xl"
           />
         </div>
       </section>

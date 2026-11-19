@@ -33,7 +33,7 @@ export type ProjectSummary = {
   /** Sub-hero details. Anything left out is simply not rendered. */
   client?: string;
   /** Year the work was done. */
-  year?: number;
+  year?: number | string;
   workTypes?: string[];
   /** Full-bleed cover under the sub-hero. Falls back to the glance image. */
   cover?: ProjectCover;
@@ -90,9 +90,14 @@ export const PROJECTS: ProjectSummary[] = [
     alt: "Regalium — leather bags film",
     src: "/images/glance/regalium.mp4",
     srcType: "video",
+    // TODO: client / work types / year were copied from a reference screenshot
+    // of another project — replace with the real Regalium details.
+    client: "Regalium",
+    year: "2024-25",
+    workTypes: ["Branding", "Identity", "print"],
     cover: {
-      type: "video",
-      src: "/images/glance/regalium.mp4",
+      type: "image",
+      src: "/images/projects/regalium/regalium-cover-img.jpg",
       alt: "Regalium — leather bags film",
       position: "50% 50%",
     },
