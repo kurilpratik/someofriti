@@ -40,12 +40,13 @@ export default function DelhiEdition() {
                 column so the copy's right edge lands on the poster grid's. */}
             <div className="self-center text-[1rem] leading-[1.8] tracking-[0.04em] text-pretty sm:text-[1.05rem] lg:ml-auto lg:max-w-[52ch] lg:text-[1.15rem] xl:text-[1.25rem]">
               <p>
-                <span className="sr-only">For the Delhi edition: </span>I led the
-                design of the main posters, adapting the existing visual identity
-                to a new city while maintaining continuity with the overall
-                system. The project reflects an approach I value — working within
-                established frameworks while allowing enough flexibility for the
-                identity to evolve and respond to new contexts.
+                <span className="sr-only">For the Delhi edition: </span>I led
+                the design of the main posters, adapting the existing visual
+                identity to a new city while maintaining continuity with the
+                overall system. The project reflects an approach I value —
+                working within established frameworks while allowing enough
+                flexibility for the identity to evolve and respond to new
+                contexts.
               </p>
             </div>
           </div>

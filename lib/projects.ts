@@ -10,6 +10,12 @@ export type ProjectCover =
       poster?: string;
       alt: string;
       position?: string;
+      /**
+       * Play the cover with its audio. Browsers only allow that once the viewer
+       * has engaged with the site, so the cover starts silent, asks for sound,
+       * and carries a toggle either way — see components/project/CoverVideo.tsx.
+       */
+      sound?: boolean;
     };
 
 export type ProjectSummary = {
@@ -101,10 +107,11 @@ export const PROJECTS: ProjectSummary[] = [
     workTypes: ["Branding", "Identity", "Print"],
     cover: {
       type: "video",
-      src: "/images/projects/sbac/sbac-video.mp4",
+      src: "/images/projects/sbac/sbac-hero-video.mp4",
       poster: "/images/projects/sbac/sbac-cover-img.png",
       alt: "Molten lava flowing between cracks in dark volcanic rock",
       position: "50% 50%",
+      sound: true,
     },
   },
   {

@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import CoverVideo from "@/components/project/CoverVideo";
 import type { ProjectSummary } from "@/lib/projects";
 
 const LABEL =
@@ -70,7 +71,14 @@ export default function ProjectSubHero({
       </div>
 
       <div className="relative aspect-[3/2] w-full overflow-hidden sm:aspect-[10/3]">
-        {media.type === "video" ? (
+        {media.type === "video" && media.sound ? (
+          <CoverVideo
+            src={media.src}
+            poster={media.poster}
+            alt={media.alt}
+            position={media.position}
+          />
+        ) : media.type === "video" ? (
           <video
             src={media.src}
             poster={media.poster}
