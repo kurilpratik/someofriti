@@ -29,16 +29,12 @@ uniform float u_phase;
 
 const float TAU = 6.28318530718;
 
+// Long folds running roughly along x, each bent into a slow S-curve.
 float folds(vec2 p, float a) {
-  // Domain warp gives the folds their slow, liquid drift.
-  vec2 q = p + 0.32 * vec2(
-    sin(p.y * 1.35 + 1.4 * sin(a)),
-    cos(p.x * 1.15 + 1.4 * cos(a))
-  );
   float h = 0.0;
-  h += 0.55 * sin(q.x * 1.25 + q.y * 2.05 + 0.8 * sin(q.y * 1.1 + a) + a);
-  h += 0.30 * sin(-q.x * 2.1 + q.y * 1.05 + 1.1 * sin(q.x * 1.6 + 2.0 * cos(a)) - a);
-  h += 0.15 * sin(q.x * 3.3 - q.y * 2.6 + 2.0 * a + 0.6 * cos(q.y * 2.0));
+  h += 0.60 * sin(p.y * 2.1 + 1.25 * sin(p.x * 0.75 + 0.7 * sin(a)) + a);
+  h += 0.32 * sin(p.y * 3.4 - 1.0 * sin(p.x * 1.05 - 0.9 * cos(a)) + 0.45 * p.x - 2.0 * a);
+  h += 0.10 * sin(p.y * 6.2 + 1.6 * sin(p.x * 0.6 + a) + 0.8 * cos(a));
   return h;
 }
 
@@ -51,34 +47,36 @@ float hash(vec2 p) {
 void main() {
   float a = u_phase * TAU;
   float aspect = u_res.x / u_res.y;
-  vec2 p = (v_uv - 0.5) * vec2(aspect, 1.0) * 2.4;
-  p = mat2(0.866, -0.5, 0.5, 0.866) * p; // drape on a diagonal
+  vec2 p = (v_uv - 0.5) * vec2(aspect, 1.0) * 3.4;
+  p = mat2(0.906, -0.423, 0.423, 0.906) * p; // drape on a gentle diagonal
 
   // Surface normal from the height field.
-  float e = 0.012;
+  float e = 0.01;
   float h = folds(p, a);
   float hx = folds(p + vec2(e, 0.0), a) - h;
   float hy = folds(p + vec2(0.0, e), a) - h;
-  vec3 n = normalize(vec3(-hx / e, -hy / e, 2.6));
+  vec3 n = normalize(vec3(-hx / e, -hy / e, 1.5));
 
-  vec3 L = normalize(vec3(-0.55, 0.65, 0.75)); // warm key from the upper left
+  vec3 L = normalize(vec3(-0.45, 0.7, 0.55)); // warm key from the upper left
   vec3 V = vec3(0.0, 0.0, 1.0);
   float diff = max(dot(n, L), 0.0);
-  float spec = pow(max(dot(reflect(-L, n), V), 0.0), 22.0);
-  float sheen = pow(1.0 - max(dot(n, V), 0.0), 2.2); // satin rim on the fold edges
+  vec3 H = normalize(L + V);
+  float ndh = max(dot(n, H), 0.0);
+  float spec = pow(ndh, 9.0);    // broad satin lobe
+  float glint = pow(ndh, 60.0);  // tight highlight on the ridges
 
   // Regalium burgundy (#5f1b1e) as the mid-tone, falling to near black.
-  vec3 deep  = vec3(0.055, 0.012, 0.016);
+  vec3 deep  = vec3(0.035, 0.008, 0.011);
   vec3 wine  = vec3(0.373, 0.106, 0.118);
-  vec3 glow  = vec3(0.74, 0.30, 0.25);
-  vec3 col = mix(deep, wine, smoothstep(0.15, 0.95, diff));
-  col += glow * spec * 0.55;
-  col += wine * sheen * 0.9;
+  vec3 glow  = vec3(0.86, 0.44, 0.30); // warm, faintly amber sheen
+  vec3 col = mix(deep, wine * 0.8, smoothstep(0.05, 1.0, diff * diff));
+  col += wine * spec * 0.75;
+  col += glow * glint * 0.45;
 
   // Keep the centre quiet so the artwork reads, and let the edges fall away.
   vec2 c = v_uv - 0.5;
-  col *= 1.0 - 0.28 * exp(-dot(c, c) * 9.0);
-  col *= smoothstep(1.05, 0.25, length(c * vec2(1.1, 0.9)));
+  col *= 1.0 - 0.3 * exp(-dot(c * vec2(1.0, 1.4), c * vec2(1.0, 1.4)) * 8.0);
+  col *= smoothstep(1.1, 0.3, length(c * vec2(1.1, 0.85)));
 
   // Fine film grain, re-seeded a few times a second.
   float g = hash(gl_FragCoord.xy + floor(u_phase * 240.0) * 17.0) - 0.5;

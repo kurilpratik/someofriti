@@ -23,27 +23,28 @@ export default function RegaliumPage() {
     <>
       <ProjectSubHero project={project} />
 
-      {/* TODO: placeholder copy taken from the reference screenshot — replace. */}
       <ProjectIntro>
         <p>
-          Bangalore Art Weekend, initiated by Usual Suspects, Svasa Life,
-          Regalium, and The Curator Mag, brought together art, culture, and
-          conversation through a programme of talks, workshops, screenings, and
-          panel discussions. <br />
-          <br /> As a senior designer at CORE Experience, I worked extensively
-          on bringing the festival’s visual identity to life across panels,
-          social media, posters, printed material, menus, and discussion
-          backdrops. The work involved translating an established creative
-          direction into multiple applications, ensuring the visual language
-          remained coherent while adapting to different formats, spaces, and
-          programming needs. <br />
-          <br /> A big part of the process was problem-solving at scale —
-          figuring out how the identity could hold across multiple touchpoints,
-          timelines, and collaborators without losing clarity or intent. <br />
-          <br /> As the festival expanded to Delhi Art Weekend, I took the
-          identity forward, leading the design of the main posters and adapting
-          the visual language to a new city while maintaining continuity with
-          the original system.
+          Luxury has always had a place in India. Regalium is about giving it a
+          new address. <br />
+          <br /> Set in the heart of Bengaluru, Regalium is an ambitious
+          mixed-use destination by the Machani Group, bringing together luxury,
+          culture, hospitality and innovation under one roof. The idea was to
+          create something distinctly Indian in its origins, yet entirely
+          contemporary in its expression. <br />
+          <br /> Developed during my time at CORE Experience, the project
+          involved translating this vision into a visual world that felt as
+          confident as the destination itself. <br />
+          <br /> The identity takes its cues from the building’s architecture,
+          particularly its defining 60-degree angular cut. This geometric
+          detail became a recurring design element, informing layouts, graphic
+          devices and a flexible system that could move across formats without
+          losing its character. <br />
+          <br /> Regalium Red, inspired by the rich laterite earth of South
+          India, brought a sense of place to the identity. Paired with deep
+          blacks, warm browns and a restrained typographic language, it created
+          a visual vocabulary that was bold, sophisticated and unmistakably its
+          own.
         </p>
       </ProjectIntro>
 
@@ -80,11 +81,14 @@ export default function RegaliumPage() {
             />
           </div>
 
-          <p className="font-ivy-ora mt-12 w-full text-[clamp(1.25rem,2.6vw,2.25rem)] leading-[1.25] font-light text-pretty italic sm:mt-16 lg:mt-24">
-            Nature inspired textures such as lava and ice introduced depth and
-            contrast, reinforcing SBAC’s balance of strength and precision. The
-            result is a bold, grounded system that moves confidently across
-            formats without leaning on traditional legal symbolism.
+          {/* Same body type as the page intro. */}
+          <p className="mt-12 w-full text-[1rem] leading-[1.8] tracking-[0.04em] text-pretty sm:mt-16 sm:text-[1.05rem] lg:mt-24 lg:text-[1.15rem] xl:text-[1.25rem]">
+            My work extended across the brand’s visual applications, from
+            campaign art direction and editorial layouts to print, digital
+            communication and environmental graphics. The challenge was to build
+            a cohesive world for a destination with many different facets,
+            allowing each to have its own personality while remaining part of
+            the larger Regalium story.
           </p>
         </div>
       </section>
@@ -123,11 +127,20 @@ export default function RegaliumPage() {
               />
             </div>
           </div>
+
+          <p className="font-ivy-ora mx-auto mt-24 text-center text-[clamp(1.75rem,4.4vw,4rem)] leading-[1.2] font-light text-pretty text-[#7a7a7a] italic sm:mt-32 lg:mt-56">
+            {/* Line breaks follow the layout on larger screens. */}
+            An identity rooted in India’s rich{" "}
+            <br className="hidden sm:inline" />
+            legacy of luxury, but designed to{" "}
+            <br className="hidden sm:inline" />
+            define what comes next.
+          </p>
         </div>
       </section>
 
       <section className="text-brand-ivory bg-black">
-        <div className="page-container pt-20 pb-12 sm:pt-28 sm:pb-16 lg:pt-72 lg:pb-24">
+        <div className="page-container pt-20 pb-24 sm:pt-28 sm:pb-28 lg:pt-72 lg:pb-24">
           <h2 className="sr-only">Regalium — the world of the brand</h2>
 
           {/* Four portrait cards; the 1st and 3rd sit lower on large screens, as in the layout. */}
@@ -198,6 +211,12 @@ export default function RegaliumPage() {
               />
             </div>
           </div>
+
+          <p className="font-ivy-ora mt-20 text-[clamp(1.25rem,2.6vw,2.375rem)] leading-[1.2] w-full font-light text-pretty italic sm:mt-28 lg:mt-40">
+            Inspired by the building’s distinctive 60-degree angular cut, I
+            developed a versatile card system that carries its architectural
+            language across print, digital and spatial applications.
+          </p>
         </div>
       </section>
 

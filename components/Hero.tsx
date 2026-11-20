@@ -34,12 +34,12 @@ export default function Hero() {
         >
           <Link
             href="/about"
-            className="group hover:text-brand-ivory relative inline-flex min-h-18 min-w-47.5 items-center justify-center text-[0.8rem] font-medium tracking-[0.18em] text-[#554D4D] uppercase transition-colors sm:min-w-50"
+            className="group hover:text-brand-ivory active:text-brand-ivory focus-visible:text-brand-ivory relative inline-flex min-h-18 min-w-47.5 items-center justify-center text-[0.8rem] font-medium tracking-[0.18em] text-[#554D4D] uppercase transition-colors sm:min-w-50"
           >
             <svg
               viewBox="0 0 240 76"
               aria-hidden="true"
-              className="text-brand-red pointer-events-none absolute inset-0 size-full overflow-visible opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+              className="text-brand-red pointer-events-none absolute inset-0 size-full overflow-visible opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-active:opacity-100 group-focus-visible:opacity-100"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
@@ -61,12 +61,12 @@ export default function Hero() {
               target.scrollIntoView({ behavior: "smooth", block: "start" });
               window.history.pushState(null, "", "#projects");
             }}
-            className="group hover:text-brand-ivory relative inline-flex min-h-18 min-w-47.5 items-center justify-center text-[0.8rem] font-medium tracking-[0.18em] text-[#554D4D] uppercase transition-colors sm:min-w-50"
+            className="group hover:text-brand-ivory active:text-brand-ivory focus-visible:text-brand-ivory relative inline-flex min-h-18 min-w-47.5 items-center justify-center text-[0.8rem] font-medium tracking-[0.18em] text-[#554D4D] uppercase transition-colors sm:min-w-50"
           >
             <svg
               viewBox="0 0 240 76"
               aria-hidden="true"
-              className="text-brand-red pointer-events-none absolute inset-0 size-full overflow-visible opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+              className="text-brand-red pointer-events-none absolute inset-0 size-full overflow-visible opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-active:opacity-100 group-focus-visible:opacity-100"
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
