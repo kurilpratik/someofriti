@@ -191,3 +191,9 @@ h3 {
       )
   );
 }
+
+/* Hide the native cursor while the media cursor (components/MediaCursor.tsx) is showing. */
+html.media-cursor-active,
+html.media-cursor-active * {
+  cursor: none !important;
+}

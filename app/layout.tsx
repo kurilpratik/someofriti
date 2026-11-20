@@ -10,6 +10,8 @@ import {
   SITE_URL,
 } from "@/lib/site";
 
+import MediaCursor from "@/components/MediaCursor";
+
 import "./globals.css";
 
 const ivyOraDisplay = localFont({
@@ -114,6 +116,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-slate-100 text-slate-900">
         {children}
+        <MediaCursor />
       </body>
     </html>
   );
