@@ -6,7 +6,8 @@ type CoverVideoProps = {
   src: string;
   poster?: string;
   alt: string;
-  position?: string;
+  /** Extra classes for the video, e.g. its object-position. */
+  className?: string;
 };
 
 /**
@@ -24,7 +25,7 @@ export default function CoverVideo({
   src,
   poster,
   alt,
-  position,
+  className = "",
 }: CoverVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
@@ -80,8 +81,7 @@ export default function CoverVideo({
         muted={muted}
         loop
         playsInline
-        className="absolute inset-0 size-full object-cover"
-        style={{ objectPosition: position }}
+        className={`absolute inset-0 size-full object-cover ${className}`}
       />
 
       <button

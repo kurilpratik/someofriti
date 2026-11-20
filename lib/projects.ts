@@ -2,14 +2,29 @@
  * `position` is a CSS object-position, e.g. "50% 40%". Use it to choose which part
  * of the cover stays in view when it is cropped to the banner.
  */
+/**
+ * Phone-only framing (below the `sm` breakpoint). `aspect` is the banner's
+ * width/height there, e.g. "2/1" (default "3/2"); `position` replaces the
+ * cover's own `position`. Use it to crop away something that should only show
+ * on wide screens, such as text burned into the artwork.
+ */
+export type ProjectCoverMobile = { aspect?: string; position?: string };
+
 export type ProjectCover =
-  | { type: "image"; src: string; alt: string; position?: string }
+  | {
+      type: "image";
+      src: string;
+      alt: string;
+      position?: string;
+      mobile?: ProjectCoverMobile;
+    }
   | {
       type: "video";
       src: string;
       poster?: string;
       alt: string;
       position?: string;
+      mobile?: ProjectCoverMobile;
       /**
        * Play the cover with its audio. Browsers only allow that once the viewer
        * has engaged with the site, so the cover starts silent, asks for sound,
@@ -66,6 +81,11 @@ export const PROJECTS: ProjectSummary[] = [
       poster: "/images/projects/nature/nature-cover-img.webp", // optional
       alt: "Nature Morte — Strange Attractors exhibition poster for Bharti Kher",
       position: "50% 44%", // keeps the gold sphere vertically centred
+      // The artist's name is burned into the bottom of the video. Phones show
+      // the cover at the video's own 3:2 shape, so nothing would be cropped:
+      // a wider frame pinned to the top cuts the name off. The text starts 75%
+      // down the frame; 21:10 pinned at the top shows only the top ~71%.
+      mobile: { aspect: "21/10", position: "50% 0%" },
     },
   },
   {
@@ -132,6 +152,9 @@ export const PROJECTS: ProjectSummary[] = [
       src: "/images/projects/bangalore/bangalore-cover-img.webp",
       alt: "Bangalore Art Weekend booklet",
       position: "50% 50%",
+      // A wide banner: the default 3:2 phone frame would cut off both sides,
+      // so phones show it at its own shape, uncropped.
+      mobile: { aspect: "2567/958" },
     },
   },
   {

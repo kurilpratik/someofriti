@@ -3,6 +3,10 @@ import Image from "next/image";
 import CoverVideo from "@/components/project/CoverVideo";
 import type { ProjectSummary } from "@/lib/projects";
 
+/** Reads the framing variables set on the cover box below. */
+const COVER_POSITION =
+  "object-(--cover-pos-mobile) sm:object-(--cover-pos)";
+
 const LABEL =
   "text-[0.75rem] font-medium tracking-[0.2em] uppercase sm:text-[0.8rem]";
 
@@ -40,6 +44,8 @@ export default function ProjectSubHero({
     src: project.src,
     alt: project.alt,
   };
+  const position = media.position ?? "50% 50%";
+  const mobile = "mobile" in media ? media.mobile : undefined;
 
   return (
     <section className="text-brand-ivory bg-black">
@@ -70,13 +76,24 @@ export default function ProjectSubHero({
         </dl>
       </div>
 
-      <div className="relative aspect-[3/2] w-full overflow-hidden sm:aspect-[10/3]">
+      {/* Framing goes through CSS variables so phones can use their own shape
+          and position (`cover.mobile`); the media below reads them back. */}
+      <div
+        className="relative aspect-(--cover-aspect) w-full overflow-hidden sm:aspect-[10/3]"
+        style={
+          {
+            "--cover-aspect": mobile?.aspect ?? "3/2",
+            "--cover-pos": position,
+            "--cover-pos-mobile": mobile?.position ?? position,
+          } as React.CSSProperties
+        }
+      >
         {media.type === "video" && media.sound ? (
           <CoverVideo
             src={media.src}
             poster={media.poster}
             alt={media.alt}
-            position={media.position}
+            className={COVER_POSITION}
           />
         ) : media.type === "video" ? (
           <video
@@ -87,8 +104,7 @@ export default function ProjectSubHero({
             muted
             loop
             playsInline
-            className="absolute inset-0 size-full object-cover"
-            style={{ objectPosition: media.position }}
+            className={`absolute inset-0 size-full object-cover ${COVER_POSITION}`}
           />
         ) : (
           <Image
@@ -97,8 +113,7 @@ export default function ProjectSubHero({
             fill
             priority
             sizes="100vw"
-            className="object-cover"
-            style={{ objectPosition: media.position }}
+            className={`object-cover ${COVER_POSITION}`}
           />
         )}
       </div>
