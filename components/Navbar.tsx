@@ -93,6 +93,7 @@ export default function Navbar() {
           aria-label="Home"
           onClick={() => setIsMenuOpen(false)}
           className="inline-flex items-center"
+          data-cursor="none"
         >
           <Image
             src="/images/logo/someofriti-logo.png"

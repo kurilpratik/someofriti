@@ -10,9 +10,11 @@ import {
 } from "motion/react";
 
 /*
- * Custom cursor that appears over any image or video: the native cursor is
- * hidden and a shape that cycles 8-point star -> 4-point star -> circle while
- * spinning follows the pointer.
+ * Custom cursor for images and videos: a shape that gooily cycles blade
+ * (4-point star) -> icon (8-point star) -> circle while spinning. It shows:
+ *  - mouse/pen: while hovering media (the native cursor is hidden),
+ *  - touch: while a finger is pressed on media, lingering briefly after,
+ *  - keyboard: centred on a :focus-visible element that is or wraps media.
  *
  * Opt an element in with data-cursor="media" (e.g. a canvas or a styled div),
  * or opt it out with data-cursor="none".
@@ -35,9 +37,10 @@ function starPoints(tips: number, inner: number, twist = 0): string {
   return pts.join(" ");
 }
 
+// Cycle order: icon-blade -> icon -> icon-circle (public/images/logo).
 const SHAPES = [
-  <polygon key="star8" points={starPoints(8, 21)} />,
-  <polygon key="star4" points={starPoints(4, 6.5, 0.08)} />,
+  <polygon key="blade" points={starPoints(4, 6.5, 0.08)} />,
+  <polygon key="icon" points={starPoints(8, 21)} />,
   <circle key="circle" cx="50" cy="50" r="40" />,
 ];
 
@@ -53,12 +56,24 @@ function isOverMedia(target: Element | null, x: number, y: number): boolean {
     .some((el) => el.matches(MEDIA_SELECTOR) && !el.closest("[data-cursor='none']"));
 }
 
+type Mode = "pointer" | "touch" | "focus" | null;
+
+/** True when a focused element is, or wraps, media that hasn't opted out. */
+function hasMedia(el: Element): boolean {
+  if (el.closest("[data-cursor='none']")) return false;
+  return el.matches(MEDIA_SELECTOR) || !!el.querySelector(MEDIA_SELECTOR);
+}
+
+// How long the cursor lingers after a finger lifts, so the tap reads.
+const TOUCH_LINGER_MS = 450;
+
 export default function MediaCursor() {
   const reduceMotion = useReducedMotion();
   const gooId = `goo-${useId().replace(/:/g, "")}`;
-  const [enabled, setEnabled] = useState(false);
-  const [active, setActive] = useState(false);
+  const [mode, setModeState] = useState<Mode>(null);
+  const active = mode !== null;
   const [shape, setShape] = useState(0);
+  const modeRef = useRef<Mode>(null);
   const pointer = useRef({ x: 0, y: 0, target: null as Element | null });
 
   const x = useMotionValue(-100);
@@ -66,60 +81,127 @@ export default function MediaCursor() {
   const springX = useSpring(x, { stiffness: 900, damping: 50, mass: 0.4 });
   const springY = useSpring(y, { stiffness: 900, damping: 50, mass: 0.4 });
 
-  // Only on devices with a precise, hovering pointer (not touch).
   useEffect(() => {
-    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const update = () => setEnabled(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
-    if (!enabled) return;
     let frame = 0;
+    let lingerTimer = 0;
+    let focused: Element | null = null;
 
+    const setMode = (next: Mode) => {
+      modeRef.current = next;
+      setModeState(next);
+    };
+    // Glide when already showing; jump when appearing somewhere new.
+    const moveTo = (px: number, py: number, instant: boolean) => {
+      x.set(px);
+      y.set(py);
+      if (instant) {
+        springX.jump(px);
+        springY.jump(py);
+      }
+    };
+    const centreOn = (el: Element, instant: boolean) => {
+      const r = el.getBoundingClientRect();
+      moveTo(r.left + r.width / 2, r.top + r.height / 2, instant);
+    };
+
+    // Mouse / pen hover: re-test what's under the pointer once per frame.
     const check = () => {
       frame = 0;
       const { x: px, y: py, target } = pointer.current;
-      setActive(isOverMedia(target, px, py));
+      if (isOverMedia(target, px, py)) setMode("pointer");
+      else if (modeRef.current !== "touch") setMode(null);
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(check);
     };
 
     const onMove = (e: PointerEvent) => {
-      if (e.pointerType === "touch") return;
+      if (e.pointerType === "touch") {
+        // Follow the finger while it's pressed on media.
+        if (modeRef.current === "touch") moveTo(e.clientX, e.clientY, false);
+        return;
+      }
+      const wasHidden = modeRef.current === null;
       pointer.current = { x: e.clientX, y: e.clientY, target: e.target as Element };
-      x.set(e.clientX);
-      y.set(e.clientY);
+      moveTo(e.clientX, e.clientY, wasHidden);
       schedule();
     };
-    // Content can scroll under a still pointer.
+
+    // Touch: show while a finger is pressed on media (:active equivalent).
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType !== "touch") return;
+      const target = e.target as Element;
+      if (!isOverMedia(target, e.clientX, e.clientY)) return;
+      window.clearTimeout(lingerTimer);
+      moveTo(e.clientX, e.clientY, modeRef.current !== "touch");
+      setMode("touch");
+    };
+    const onUp = (e: PointerEvent) => {
+      if (e.pointerType !== "touch" || modeRef.current !== "touch") return;
+      window.clearTimeout(lingerTimer);
+      lingerTimer = window.setTimeout(() => {
+        if (modeRef.current === "touch") setMode(null);
+      }, TOUCH_LINGER_MS);
+    };
+
+    // Keyboard: show centred on a :focus-visible element that is/wraps media.
+    const onFocusIn = (e: FocusEvent) => {
+      const el = e.target as Element;
+      if (el instanceof Element && el.matches(":focus-visible") && hasMedia(el)) {
+        focused = el;
+        centreOn(el, modeRef.current !== "focus");
+        setMode("focus");
+      }
+    };
+    const onFocusOut = () => {
+      focused = null;
+      if (modeRef.current === "focus") setMode(null);
+    };
+
+    // Content can scroll under a still pointer or a focused element.
     const onScroll = () => {
+      if (modeRef.current === "focus" && focused) {
+        centreOn(focused, true);
+        return;
+      }
+      if (modeRef.current === "touch") return;
       const { x: px, y: py } = pointer.current;
       pointer.current.target = document.elementFromPoint(px, py);
       schedule();
     };
-    const onLeave = () => setActive(false);
+    const onLeave = () => {
+      if (modeRef.current === "pointer") setMode(null);
+    };
 
+    const root = document.documentElement;
     window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerdown", onDown, { passive: true });
+    window.addEventListener("pointerup", onUp, { passive: true });
+    window.addEventListener("pointercancel", onUp, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true, capture: true });
-    document.documentElement.addEventListener("pointerleave", onLeave);
+    document.addEventListener("focusin", onFocusIn);
+    document.addEventListener("focusout", onFocusOut);
+    root.addEventListener("pointerleave", onLeave);
     return () => {
       if (frame) cancelAnimationFrame(frame);
+      window.clearTimeout(lingerTimer);
       window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
       window.removeEventListener("scroll", onScroll, { capture: true });
-      document.documentElement.removeEventListener("pointerleave", onLeave);
+      document.removeEventListener("focusin", onFocusIn);
+      document.removeEventListener("focusout", onFocusOut);
+      root.removeEventListener("pointerleave", onLeave);
     };
-  }, [enabled, x, y]);
+  }, [x, y, springX, springY]);
 
-  // Hide the native cursor while ours is showing.
+  // Hide the native cursor only while the mouse is driving ours.
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.toggle("media-cursor-active", enabled && active);
+    root.classList.toggle("media-cursor-active", mode === "pointer");
     return () => root.classList.remove("media-cursor-active");
-  }, [enabled, active]);
+  }, [mode]);
 
   // Cycle through the shapes while visible.
   useEffect(() => {
@@ -130,8 +212,6 @@ export default function MediaCursor() {
     );
     return () => window.clearInterval(id);
   }, [active, reduceMotion]);
-
-  if (!enabled) return null;
 
   return (
     <motion.div
