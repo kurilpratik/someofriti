@@ -31,45 +31,52 @@ export default function NextProject({ slug }: { slug: string }) {
           href={`/projects/${next.slug}`}
           className="group focus-visible:outline-brand-primary block focus-visible:outline-2 focus-visible:outline-offset-8"
         >
-          <p className="text-muted-foreground text-[0.72rem] font-medium tracking-[0.22em] uppercase">
-            Next project
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between sm:gap-10">
+            <div>
+              <p className="text-muted-foreground text-[0.72rem] font-medium tracking-[0.22em] uppercase">
+                Next project
+              </p>
 
-          <div className="mt-5 flex items-end justify-between gap-6">
-            <h2 className="text-[clamp(1.8rem,4vw,3.4rem)] leading-[1.08] font-light tracking-tight">
-              {next.title}
-            </h2>
-            <span
-              aria-hidden="true"
-              className="text-brand-primary mb-2 text-3xl transition-transform duration-300 group-hover:translate-x-2 sm:text-5xl"
-            >
-              →
-            </span>
-          </div>
+              <div className="mt-5">
+                <h2 className="text-[clamp(1.8rem,4vw,3.4rem)] leading-[1.08] font-light tracking-tight">
+                  {next.title}
+                </h2>
+              </div>
+            </div>
 
-          <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden sm:aspect-[21/8]">
-            {isVideo ? (
-              <video
-                src={media.src}
-                aria-label={media.alt}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                style={{ objectPosition: media.position }}
-              />
-            ) : (
-              <Image
-                src={media.src}
-                alt={media.alt}
-                fill
-                sizes="(max-width: 1800px) 100vw, 1800px"
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                style={{ objectPosition: media.position }}
-              />
-            )}
+            <div className="mt-8 flex items-start gap-4 sm:mt-0 sm:w-[40%] sm:shrink-0 sm:gap-6">
+              <div className="relative aspect-[16/9] min-w-0 flex-1 overflow-hidden">
+                {isVideo ? (
+                  <video
+                    src={media.src}
+                    aria-label={media.alt}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    style={{ objectPosition: media.position }}
+                  />
+                ) : (
+                  <Image
+                    src={media.src}
+                    alt={media.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    style={{ objectPosition: media.position }}
+                  />
+                )}
+              </div>
+
+              <span
+                aria-hidden="true"
+                className="text-brand-primary mt-1 shrink-0 text-3xl transition-transform duration-300 group-hover:translate-x-2 sm:text-5xl"
+              >
+                →
+              </span>
+            </div>
           </div>
         </Link>
       </div>
