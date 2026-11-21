@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { useId, useState } from "react";
 
+import { REVEAL } from "@/components/motion/config";
+import Reveal from "@/components/motion/Reveal";
+
 const BASE = "/images/projects/nature";
 
 /**
@@ -66,28 +69,35 @@ export default function HangingGardens() {
 
   return (
     <section className="bg-brand-white text-black">
-      <div className="page-container py-16 sm:py-24 lg:py-28">
+      <div className="page-container py-24 sm:py-36 lg:py-42">
         <h2 className="sr-only">Hanging Gardens — identity studies</h2>
 
-        <div className="mx-auto grid grid-cols-1 items-start gap-x-10 gap-y-12 sm:grid-cols-2 lg:w-[82%] lg:grid-cols-3 lg:gap-x-12 lg:gap-y-14">
-          {TILES.slice(0, 3).map((tile) => (
-            <Tile key={tile.src} {...tile} />
+        <div className="mx-auto grid grid-cols-1 items-start gap-x-10 gap-y-18 sm:grid-cols-2 lg:w-[82%] lg:grid-cols-3 lg:gap-x-12 lg:gap-y-21">
+          {/* Each row reveals left to right. */}
+          {TILES.slice(0, 3).map((tile, index) => (
+            <Reveal key={tile.src} delay={index * REVEAL.stagger}>
+              <Tile {...tile} />
+            </Reveal>
           ))}
 
-          <Tile {...TILES[3]} />
+          <Reveal>
+            <Tile {...TILES[3]} />
+          </Reveal>
 
           {/* The story film, portrait, in place of the mockup's olive block. */}
-          <div className="relative aspect-[9/16] w-full overflow-hidden bg-black">
-            <video
-              src={`${BASE}/hanging garden story.mp4`}
-              aria-label="Hanging Gardens story film — the identity in motion"
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 size-full object-cover"
-            />
-          </div>
+          <Reveal delay={REVEAL.stagger}>
+            <div className="relative aspect-[9/16] w-full overflow-hidden bg-black">
+              <video
+                src={`${BASE}/hanging garden story.mp4`}
+                aria-label="Hanging Gardens story film — the identity in motion"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 size-full object-cover"
+              />
+            </div>
+          </Reveal>
 
           <div className="text-[0.95rem] leading-[1.55] font-light tracking-[0.01em] text-pretty sm:text-[1rem] lg:text-[1.05rem]">
             <p id={copyId}>

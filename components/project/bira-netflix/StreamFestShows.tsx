@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import Reveal from "@/components/motion/Reveal";
+
 const BASE = "/images/projects/netflix";
 
 /**
@@ -30,7 +32,7 @@ const ROWS = [
 export default function StreamFestShows() {
   return (
     <section className="bg-brand-primary text-white">
-      <div className="page-container @container py-16 sm:py-24 lg:py-28">
+      <div className="page-container @container py-24 sm:py-36 lg:py-42">
         <h2 className="sr-only">
           Bira 91 × Netflix StreamFest — show artwork and character studies
         </h2>
@@ -42,14 +44,16 @@ export default function StreamFestShows() {
         <ul className="grid gap-y-[3.6cqw]">
           {ROWS.map((row) => (
             <li key={row.src}>
-              <Image
-                src={row.src}
-                width={row.width}
-                height={row.height}
-                alt={row.alt}
-                sizes="100vw"
-                className="h-auto w-full"
-              />
+              <Reveal>
+                <Image
+                  src={row.src}
+                  width={row.width}
+                  height={row.height}
+                  alt={row.alt}
+                  sizes="100vw"
+                  className="h-auto w-full"
+                />
+              </Reveal>
             </li>
           ))}
         </ul>

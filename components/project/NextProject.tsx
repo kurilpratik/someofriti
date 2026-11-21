@@ -25,8 +25,9 @@ export default function NextProject({ slug }: { slug: string }) {
   const isVideo = !stillSrc && next.srcType === "video";
 
   return (
-    <section className="text-brand-ivory bg-black">
-      <div className="page-container py-20 sm:py-28">
+    // Stacked above the cover, which sinks beneath whatever follows it.
+    <section className="text-brand-ivory relative z-10 bg-black">
+      <div className="page-container py-30 sm:py-42">
         <Link
           href={`/projects/${next.slug}`}
           className="group focus-visible:outline-brand-primary block focus-visible:outline-2 focus-visible:outline-offset-8"

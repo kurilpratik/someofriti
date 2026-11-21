@@ -86,6 +86,18 @@ body {
   box-sizing: border-box;
 }
 
+/*
+ * Scroll effects (components/motion) mark their element with data-scroll-motion.
+ * For visitors who ask for less motion, hold them still: reveals keep only
+ * their fade, parallax and the cover drift stop. `!important` is what lets this
+ * beat the inline transform the animation library writes.
+ */
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-motion] {
+    transform: none !important;
+  }
+}
+
 .hero-title {
   font-family: var(--font-degular);
 }

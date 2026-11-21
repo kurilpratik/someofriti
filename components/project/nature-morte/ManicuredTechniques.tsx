@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+import { REVEAL } from "@/components/motion/config";
+import Reveal from "@/components/motion/Reveal";
+
 const BASE = "/images/projects/nature";
 
 /** The three constructions across the top row. */
@@ -48,7 +51,7 @@ const BOTTOM_ROW = [
 export default function ManicuredTechniques() {
   return (
     <section className="bg-brand-white text-black">
-      <div className="page-container pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-16 lg:pb-28">
+      <div className="page-container pt-12 pb-24 sm:pt-18 sm:pb-36 lg:pt-24 lg:pb-42">
         <h2 className="sr-only">
           Manicured Techniques — typographic constructions
         </h2>
@@ -62,32 +65,36 @@ export default function ManicuredTechniques() {
         </p>
 
         <div className="mx-auto lg:w-[82%]">
-          <ul className="mt-14 grid grid-cols-1 items-start gap-x-10 gap-y-14 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-x-12">
-            {TOP_ROW.map((study) => (
+          <ul className="mt-21 grid grid-cols-1 items-start gap-x-10 gap-y-21 sm:grid-cols-2 lg:mt-30 lg:grid-cols-3 lg:gap-x-12">
+            {TOP_ROW.map((study, index) => (
               <li key={study.src}>
-                <Image
-                  src={study.src}
-                  width={study.width}
-                  height={study.height}
-                  alt={study.alt}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="h-auto w-full"
-                />
+                <Reveal delay={index * REVEAL.stagger}>
+                  <Image
+                    src={study.src}
+                    width={study.width}
+                    height={study.height}
+                    alt={study.alt}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="h-auto w-full"
+                  />
+                </Reveal>
               </li>
             ))}
           </ul>
 
-          <ul className="mt-16 grid grid-cols-1 items-end gap-x-10 gap-y-14 lg:mt-24 lg:grid-cols-2 lg:gap-x-12">
-            {BOTTOM_ROW.map((study) => (
+          <ul className="mt-24 grid grid-cols-1 items-end gap-x-10 gap-y-21 lg:mt-36 lg:grid-cols-2 lg:gap-x-12">
+            {BOTTOM_ROW.map((study, index) => (
               <li key={study.src}>
-                <Image
-                  src={study.src}
-                  width={study.width}
-                  height={study.height}
-                  alt={study.alt}
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="h-auto w-full"
-                />
+                <Reveal delay={index * REVEAL.stagger}>
+                  <Image
+                    src={study.src}
+                    width={study.width}
+                    height={study.height}
+                    alt={study.alt}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="h-auto w-full"
+                  />
+                </Reveal>
               </li>
             ))}
           </ul>
@@ -95,16 +102,19 @@ export default function ManicuredTechniques() {
 
         {/* Closing copy. One run of text that splits into two balanced columns
             on large screens, the way the intro under the sub-hero does. */}
-        <div className="mt-16 text-[1.05rem] leading-[1.85] font-normal tracking-[0.045em] text-pretty sm:text-[1.15rem] lg:mt-24 lg:columns-2 lg:gap-x-20 lg:text-[1.2rem]">
-          <p>
-            The final mark was built as a structured framework rather than a
-            fixed logo, allowing it to adapt naturally across spatial and print
-            applications. The identity extended seamlessly into the exhibition
-            space from wall graphics to spatial markers creating a cohesive
-            visual experience that guided visitors without distracting from the
-            artworks. The system allowed each element to hold presence while
-            remaining secondary to the sculptures themselves.
-          </p>
+        <div className="mt-24 lg:mt-36">
+          <div className="text-[1.05rem] leading-[1.85] font-normal tracking-[0.045em] text-pretty sm:text-[1.15rem] lg:columns-2 lg:gap-x-20 lg:text-[1.2rem]">
+            <p>
+              The final mark was built as a structured framework rather than a
+              fixed logo, allowing it to adapt naturally across spatial and
+              print applications. The identity extended seamlessly into the
+              exhibition space from wall graphics to spatial markers creating a
+              cohesive visual experience that guided visitors without
+              distracting from the artworks. The system allowed each element to
+              hold presence while remaining secondary to the sculptures
+              themselves.
+            </p>
+          </div>
         </div>
       </div>
     </section>

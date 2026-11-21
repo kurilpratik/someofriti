@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+import { REVEAL } from "@/components/motion/config";
+import Reveal from "@/components/motion/Reveal";
+
 const BASE = "/images/projects/nature";
 
 /**
@@ -70,20 +73,23 @@ const SHOTS = [
 export default function ManicuredInstall() {
   return (
     <section className="bg-black">
-      <div className="page-container py-14 sm:py-20 lg:py-24">
+      <div className="page-container py-21 sm:py-30 lg:py-36">
         <h2 className="sr-only">Manicured Techniques — the exhibition</h2>
 
         <ul className="grid grid-cols-1 gap-y-3 lg:grid-cols-3 lg:gap-x-[2.24%] lg:gap-y-7">
-          {SHOTS.map((shot) => (
+          {SHOTS.map((shot, index) => (
             <li key={shot.src} className={shot.cell}>
-              <Image
-                src={shot.src}
-                width={shot.width}
-                height={shot.height}
-                alt={shot.alt}
-                sizes={shot.sizes}
-                className="h-auto w-full"
-              />
+              {/* Each row runs left to right. */}
+              <Reveal delay={(index % 2) * REVEAL.stagger}>
+                <Image
+                  src={shot.src}
+                  width={shot.width}
+                  height={shot.height}
+                  alt={shot.alt}
+                  sizes={shot.sizes}
+                  className="h-auto w-full"
+                />
+              </Reveal>
             </li>
           ))}
         </ul>

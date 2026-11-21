@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+import { REVEAL } from "@/components/motion/config";
+import Parallax from "@/components/motion/Parallax";
+import Reveal from "@/components/motion/Reveal";
+
 const BASE = "/images/projects/netflix";
 
 /**
@@ -54,58 +58,68 @@ const LARGE_PHONE = {
 export default function TaproomSocials() {
   return (
     <section className="bg-black text-white">
-      <div className="page-container pb-16 sm:pb-24 lg:pb-28">
+      <div className="page-container pb-24 sm:pb-36 lg:pb-42">
         <h2 className="sr-only">
           Bira Taproom — campaign creatives and social stories
         </h2>
 
-        <div className="grid grid-cols-1 items-center gap-x-10 gap-y-16 lg:grid-cols-12 lg:gap-x-16">
+        <div className="grid grid-cols-1 items-center gap-x-10 gap-y-24 lg:grid-cols-12 lg:gap-x-16">
           {/* The 2x2 grid of Taproom posts. */}
           <ul className="grid gap-y-4 sm:gap-y-6 lg:col-span-7">
-            {CREATIVES.map((creative) => (
+            {CREATIVES.map((creative, index) => (
               <li key={creative.src}>
-                <Image
-                  src={creative.src}
-                  width={creative.width}
-                  height={creative.height}
-                  alt={creative.alt}
-                  sizes="(max-width: 1024px) 100vw, 58vw"
-                  className="h-auto w-full"
-                />
+                <Reveal delay={index * REVEAL.stagger}>
+                  <Image
+                    src={creative.src}
+                    width={creative.width}
+                    height={creative.height}
+                    alt={creative.alt}
+                    sizes="(max-width: 1024px) 100vw, 58vw"
+                    className="h-auto w-full"
+                  />
+                </Reveal>
               </li>
             ))}
           </ul>
 
           {/* The device cluster: two phones stacked beside one larger one, all
-              at the same scale, which is what the fr track widths hold. */}
+              at the same scale, which is what the fr track widths hold. The
+              small pair sits deeper than the large phone, so they part on scroll. */}
           <ul className="mx-auto grid w-full max-w-[26rem] grid-cols-[350fr_592fr] items-center gap-x-[9%] sm:max-w-[32rem] lg:col-span-5 lg:max-w-none">
             <li className="@container">
               {/* The gap is read off the column's own width, so the two phones
                   keep the mockup's spacing at every size. */}
-              <div className="grid gap-y-[25cqw]">
-                {SMALL_PHONES.map((phone) => (
-                  <Image
-                    key={phone.src}
-                    src={phone.src}
-                    width={phone.width}
-                    height={phone.height}
-                    alt={phone.alt}
-                    sizes="(max-width: 1024px) 40vw, 16vw"
-                    className="h-auto w-full"
-                  />
-                ))}
-              </div>
+              <Parallax depth="far">
+                <div className="grid gap-y-[25cqw]">
+                  {SMALL_PHONES.map((phone, index) => (
+                    <Reveal key={phone.src} delay={index * REVEAL.stagger}>
+                      <Image
+                        src={phone.src}
+                        width={phone.width}
+                        height={phone.height}
+                        alt={phone.alt}
+                        sizes="(max-width: 1024px) 40vw, 16vw"
+                        className="h-auto w-full"
+                      />
+                    </Reveal>
+                  ))}
+                </div>
+              </Parallax>
             </li>
 
             <li>
-              <Image
-                src={LARGE_PHONE.src}
-                width={LARGE_PHONE.width}
-                height={LARGE_PHONE.height}
-                alt={LARGE_PHONE.alt}
-                sizes="(max-width: 1024px) 60vw, 26vw"
-                className="h-auto w-full"
-              />
+              <Reveal delay={REVEAL.stagger}>
+                <Parallax depth="near">
+                  <Image
+                    src={LARGE_PHONE.src}
+                    width={LARGE_PHONE.width}
+                    height={LARGE_PHONE.height}
+                    alt={LARGE_PHONE.alt}
+                    sizes="(max-width: 1024px) 60vw, 26vw"
+                    className="h-auto w-full"
+                  />
+                </Parallax>
+              </Reveal>
             </li>
           </ul>
         </div>

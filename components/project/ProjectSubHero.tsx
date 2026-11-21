@@ -1,11 +1,11 @@
 import Image from "next/image";
 
+import CoverScrollAway from "@/components/motion/CoverScrollAway";
 import CoverVideo from "@/components/project/CoverVideo";
 import type { ProjectSummary } from "@/lib/projects";
 
 /** Reads the framing variables set on the cover box below. */
-const COVER_POSITION =
-  "object-(--cover-pos-mobile) sm:object-(--cover-pos)";
+const COVER_POSITION = "object-(--cover-pos-mobile) sm:object-(--cover-pos)";
 
 const LABEL =
   "text-[0.75rem] font-medium tracking-[0.2em] uppercase sm:text-[0.8rem]";
@@ -77,8 +77,9 @@ export default function ProjectSubHero({
       </div>
 
       {/* Framing goes through CSS variables so phones can use their own shape
-          and position (`cover.mobile`); the media below reads them back. */}
-      <div
+          and position (`cover.mobile`); the media below reads them back.
+          It sinks as it scrolls away, so the intro slides up over it. */}
+      <CoverScrollAway
         className="relative aspect-(--cover-aspect) w-full overflow-hidden sm:aspect-[10/3]"
         style={
           {
@@ -116,7 +117,7 @@ export default function ProjectSubHero({
             className={`object-cover ${COVER_POSITION}`}
           />
         )}
-      </div>
+      </CoverScrollAway>
     </section>
   );
 }
