@@ -191,3 +191,41 @@ export const SQUARE_PATTERNS: { value: SquarePattern; label: string }[] = [
   { value: "cascade", label: "Cascade" },
   { value: "flicker", label: "Flicker" },
 ];
+
+/** Look used by the site Preloader (designed in /generator). */
+export const PRELOADER_SETTINGS: PatternSettings = {
+  speed: 1,
+  seed: 6049,
+  background: "#eb2427",
+  squares: {
+    enabled: true,
+    columns: 29,
+    gap: 0,
+    pattern: "ripple",
+    frequency: 1,
+    density: 0.42,
+    softness: 0,
+    color: "#0d0d0d",
+    accent: "#f6f1ea",
+    accentRatio: 0,
+  },
+  dots: { enabled: false, columns: 6, size: 0.13, pulse: 0.35, color: "#f6f1ea" },
+  burst: {
+    enabled: true,
+    points: 22,
+    depth: 0.35,
+    size: 0.8,
+    spin: 0.25,
+    pulse: 0.06,
+    color: "#0d0d0d",
+  },
+  text: {
+    enabled: true,
+    value: "Hello",
+    font: "ivy",
+    italic: true,
+    size: 0.17,
+    wave: 0.5,
+    color: "#f6f1ea",
+  },
+};

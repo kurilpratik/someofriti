@@ -9,6 +9,8 @@ interface PatternCanvasProps {
   settings: PatternSettings;
   paused?: boolean;
   className?: string;
+  /** Upper bound for devicePixelRatio; lower values draw fewer pixels. */
+  maxDpr?: number;
   ref?: Ref<HTMLCanvasElement | null>;
 }
 
@@ -31,11 +33,19 @@ function readFonts(): FontFamilies {
  * Settings can change on every render without restarting the loop, and a
  * speed change keeps the current phase (the clock accumulates speed * dt).
  */
-export default function PatternCanvas({ settings, paused = false, className, ref }: PatternCanvasProps) {
+export default function PatternCanvas({
+  settings,
+  paused = false,
+  className,
+  maxDpr = 2,
+  ref,
+}: PatternCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const settingsRef = useRef(settings);
   const pausedRef = useRef(paused);
   const fontsRef = useRef<FontFamilies>(FALLBACK_FONTS);
+  // Text waits for its web font, so it never flashes in the fallback face.
+  const fontReadyRef = useRef(false);
 
   useImperativeHandle(ref, () => canvasRef.current as HTMLCanvasElement, []);
 
@@ -48,9 +58,20 @@ export default function PatternCanvas({ settings, paused = false, className, ref
   const { font, italic } = settings.text;
   useEffect(() => {
     fontsRef.current = readFonts();
+    if (!document.fonts) {
+      fontReadyRef.current = true;
+      return;
+    }
+    let live = true;
     document.fonts
-      ?.load(textFont({ ...settingsRef.current.text, font, italic }, 32, fontsRef.current))
-      .catch(() => {});
+      .load(textFont({ ...settingsRef.current.text, font, italic }, 32, fontsRef.current))
+      .catch(() => {})
+      .finally(() => {
+        if (live) fontReadyRef.current = true;
+      });
+    return () => {
+      live = false;
+    };
   }, [font, italic]);
 
   useEffect(() => {
@@ -64,7 +85,7 @@ export default function PatternCanvas({ settings, paused = false, className, ref
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
       width = rect.width;
       height = rect.height;
       canvas.width = Math.max(1, Math.round(width * dpr));
@@ -84,8 +105,9 @@ export default function PatternCanvas({ settings, paused = false, className, ref
       last = now;
       const s = settingsRef.current;
       if (!pausedRef.current) clock += dt * s.speed;
+      const shown = fontReadyRef.current ? s : { ...s, text: { ...s.text, enabled: false } };
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      renderPattern(ctx, width, height, clock, s, fontsRef.current);
+      renderPattern(ctx, width, height, clock, shown, fontsRef.current);
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
@@ -94,7 +116,7 @@ export default function PatternCanvas({ settings, paused = false, className, ref
       cancelAnimationFrame(frame);
       observer.disconnect();
     };
-  }, []);
+  }, [maxDpr]);
 
   return <canvas ref={canvasRef} className={className ?? "block h-full w-full"} />;
 }

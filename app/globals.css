@@ -126,37 +126,6 @@ h3 {
   @apply font-ivy-ora;
 }
 
-@keyframes hello-bob {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  30% {
-    transform: translateY(-14px);
-    opacity: 1;
-  }
-  60% {
-    transform: translateY(4px);
-    opacity: 1;
-  }
-}
-
-.hello-letter {
-  display: inline-block;
-  /*
-   * Italic glyphs draw past their box (slant on the right, ascenders above).
-   * With `will-change: transform` each letter is its own layer sized to its
-   * box, so some GPUs clip that overflow. Padding grows the box to fit the
-   * ink; the negative margins keep the letter spacing unchanged.
-   */
-  padding: 0.25em 0.2em;
-  margin: -0.25em -0.2em;
-  transform-origin: center bottom;
-  animation: hello-bob 1.2s ease-in-out infinite;
-  will-change: transform;
-}
-
 /*
  * Shared page container. The navbar, the glance section and the project pages
  * all use it, so their left and right edges line up. Side spacing grows with
