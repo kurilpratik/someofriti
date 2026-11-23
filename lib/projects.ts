@@ -92,7 +92,7 @@ export const PROJECTS: ProjectSummary[] = [
     slug: "bira-netflix",
     title: "Bira + Netflix",
     alt: "Stranger Things character illustration",
-    src: "/images/glance/eleven_levitation_loop.gif",
+    src: "/images/projects/netflix/Asset 1@4x.webp",
     client: "Bira + Netflix",
     workTypes: ["Campaign", "Print", "Illustration", "Social Media"],
     year: 2021,

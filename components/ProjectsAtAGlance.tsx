@@ -25,11 +25,20 @@ type Project = ProjectSummary & {
   phase: number;
   /** card height while orbiting, as a fraction of the stage */
   size: number;
+  /**
+   * Show the whole image inside a solid frame instead of cropping it to the
+   * tile. `color` should match the artwork's own background; `padding` is the
+   * gap kept between the artwork and the tile edge.
+   */
+  matte?: { color: string; padding: string };
 };
 
 type Rect = { x: number; y: number; w: number; h: number };
 
-type Layout = Pick<Project, "aspect" | "grid" | "ring" | "phase" | "size">;
+type Layout = Pick<
+  Project,
+  "aspect" | "grid" | "ring" | "phase" | "size" | "matte"
+>;
 
 /** How each project sits in the grid and on the orbit, keyed by slug. */
 const LAYOUT: Record<string, Layout> = {
@@ -41,11 +50,14 @@ const LAYOUT: Record<string, Layout> = {
     size: 0.3,
   },
   "bira-netflix": {
-    aspect: 509 / 509,
+    aspect: 509 / 555,
     grid: { col: 1, row: 0, colSpan: 1, rowSpan: 1 },
     ring: 1,
     phase: 0.12,
     size: 0.21,
+    // The grid cell is wider than this portrait artwork, so cropping it cut
+    // the "Stranger Things" wordmark at the bottom edge.
+    matte: { color: "#ef0016", padding: "6%" },
   },
   regalium: {
     aspect: 2048 / 1536,
@@ -366,6 +378,24 @@ export default function ProjectsAtAGlance() {
                   aria-hidden="true"
                   className="absolute inset-0 size-full object-cover"
                 />
+              ) : project.matte ? (
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundColor: project.matte.color,
+                    padding: project.matte.padding,
+                  }}
+                >
+                  <div className="relative size-full">
+                    <Image
+                      src={project.src}
+                      alt=""
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
               ) : (
                 <Image
                   src={project.src}
