@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import Preloader from "@/components/Preloader";
@@ -80,6 +81,7 @@ export default function Home() {
       <Hero />
       <Navbar />
       <ProjectsAtAGlance />
+      <Footer />
     </>
   );
 }

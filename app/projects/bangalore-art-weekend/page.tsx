@@ -30,27 +30,30 @@ export default function BangaloreArtWeekendPage() {
     <>
       <ProjectSubHero project={project} />
 
-      {/* One block of copy: it splits into two balanced columns on large screens. */}
+      {/* One block of copy: it flows through two balanced columns above phone width. */}
       <ProjectIntro>
         <p>
           Bangalore Art Weekend, initiated by Usual Suspects, Svasa Life,
           Regalium, and The Curator Mag, brought together art, culture, and
           conversation through a programme of talks, workshops, screenings, and
-          panel discussions. <br />
-          <br /> As a senior designer at CORE Experience, I worked extensively
-          on bringing the festival’s visual identity to life across panels,
-          social media, posters, printed material, menus, and discussion
-          backdrops. The work involved translating an established creative
-          direction into multiple applications, ensuring the visual language
-          remained coherent while adapting to different formats, spaces, and
-          programming needs. <br />
-          <br /> A big part of the process was problem-solving at scale —
-          figuring out how the identity could hold across multiple touchpoints,
-          timelines, and collaborators without losing clarity or intent. <br />
-          <br /> As the festival expanded to Delhi Art Weekend,I took the
-          identity forward, leading the design of the main posters and adapting
-          the visual language to a new city while maintaining continuity with
-          the original system.
+          panel discussions.
+        </p>
+        <p>
+          As a senior designer at CORE Experience, I worked extensively on
+          bringing the festival’s visual identity to life across panels, social
+          media, posters, printed material, menus, and discussion backdrops. The
+          work involved translating an established creative direction into
+          multiple applications, ensuring the visual language remained coherent
+          while adapting to different formats, spaces, and programming needs. A
+          big part of the process was problem-solving at scale — figuring out
+          how the identity could hold across multiple touchpoints, timelines,
+          and collaborators without losing clarity or intent.
+        </p>
+        <p>
+          As the festival expanded to Delhi Art Weekend, I took the identity
+          forward, leading the design of the main posters and adapting the
+          visual language to a new city while maintaining continuity with the
+          original system.
         </p>
       </ProjectIntro>
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Parallax from "@/components/motion/Parallax";
 import Reveal from "@/components/motion/Reveal";
 import NextProject from "@/components/project/NextProject";
-import ProjectIntro from "@/components/project/ProjectIntro";
+import ProjectIntro, { ColumnBreak } from "@/components/project/ProjectIntro";
 import ProjectSubHero from "@/components/project/ProjectSubHero";
 import { requireProject } from "@/lib/projects";
 import { pageMetadata } from "@/lib/site";
@@ -30,11 +30,15 @@ export default function SbacLawPage() {
           pillars of justice — visuals that feel predictable and disconnected
           from how modern law firms actually operate. For SBAC Law, the goal was
           to move away from cliché and build an identity that felt bold,
-          grounded, and strategic. <br />
-          <br /> After understanding SBAC’s values and their problem-solving
-          approach, I developed a visual system rooted in strength, clarity, and
-          structure. <br />
-          <br />
+          grounded, and strategic.
+        </p>
+        <p>
+          After understanding SBAC’s values and their problem-solving approach,
+          I developed a visual system rooted in strength, clarity, and
+          structure.
+        </p>
+        <ColumnBreak />
+        <p>
           The identity draws inspiration from natural forces — molten lava, ice
           formations, and fluid motion — representing resilience,
           transformation, and precision. These elements translated into a

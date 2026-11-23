@@ -8,9 +8,9 @@ import NavHeightSync from "@/components/NavHeightSync";
 
 const navItems = [
   { label: "Projects", href: "/#projects" },
-  { label: "Connect", href: "/#connect" },
-  { label: "Hire", href: "/#hire" },
+  { label: "Services", href: "/#services" },
   { label: "Who is this?", href: "/about" },
+  { label: "Hire", href: "/#hire" },
 ];
 
 const MENU_ID = "mobile-nav-menu";
