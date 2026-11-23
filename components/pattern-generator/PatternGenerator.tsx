@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 import { RangeSlider } from "@/components/ui/be-ui-range-slider";
@@ -410,7 +411,12 @@ export default function PatternGenerator() {
         >
           <header className="space-y-4 px-5 pt-5 pb-5">
             <div className="flex items-center justify-between">
-              <h1 className="font-ivy-ora text-2xl font-light italic">Pattern generator</h1>
+              <Link
+                href="/"
+                className="text-foreground/50 hover:text-foreground text-[11px] tracking-[0.14em] uppercase"
+              >
+                ← someofriti
+              </Link>
               <button
                 type="button"
                 onClick={() => setPanelOpen(false)}
@@ -419,6 +425,13 @@ export default function PatternGenerator() {
               >
                 Hide
               </button>
+            </div>
+            <div className="space-y-2">
+              <h1 className="font-ivy-ora text-3xl font-light italic">Playtime</h1>
+              <p className="text-foreground/60 text-sm leading-relaxed">
+                The pattern from the intro, yours to mess with. Push the sliders, shuffle the
+                colours, export whatever you make.
+              </p>
             </div>
             <div className="flex gap-2">
               <Button onClick={() => setPaused((p) => !p)}>{paused ? "Play" : "Pause"}</Button>

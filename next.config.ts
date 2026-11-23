@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
   rewrites() {
     return [{ source: "/favicon.ico", destination: "/icon.png" }];
   },
+  // The pattern tool used to live at /generator; keep old links working.
+  redirects() {
+    return [{ source: "/generator", destination: "/playtime", permanent: true }];
+  },
   partialPrefetching: true,
   turbopack: {
     rules: {

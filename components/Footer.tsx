@@ -1,13 +1,20 @@
 import Link from "next/link";
 
 import { PROJECTS } from "@/lib/projects";
-import { AUTHOR_NAME, AUTHOR_ROLE, LOCATION, SOCIALS } from "@/lib/site";
+import {
+  AUTHOR_NAME,
+  AUTHOR_ROLE,
+  CONTACT_EMAIL,
+  LOCATION,
+  SOCIALS,
+} from "@/lib/site";
 
 const pageLinks = [
   { label: "Projects", href: "/#projects" },
   { label: "Services", href: "/#services" },
   { label: "Who is this?", href: "/about" },
   { label: "Hire", href: "/#hire" },
+  { label: "Playtime", href: "/playtime" },
 ];
 
 const headingClass =
@@ -37,6 +44,12 @@ export default async function Footer() {
             <p className="mt-3 max-w-[18rem] text-[0.95rem] leading-[1.6] text-[#f5f1ea]/60">
               {AUTHOR_ROLE}, based in {LOCATION}.
             </p>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="mt-6 inline-block border-b border-[#f5f1ea]/30 pb-0.5 text-[0.95rem] text-[#f5f1ea]/80 transition-colors duration-200 hover:border-[#f5f1ea] hover:text-[#f5f1ea]"
+            >
+              {CONTACT_EMAIL}
+            </a>
           </div>
 
           <nav aria-label="Projects" className="lg:col-span-4">
@@ -80,6 +93,11 @@ export default async function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a href={`mailto:${CONTACT_EMAIL}`} className={linkClass}>
+                  Email ↗
+                </a>
+              </li>
             </ul>
           </div>
         </div>

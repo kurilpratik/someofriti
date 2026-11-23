@@ -10,7 +10,7 @@ const VISIBLE_MS = 2600;
 const EXIT_MS = 1000;
 
 /*
- * Intro screen: the generative pattern from /generator, drawn live on a
+ * Intro screen: the generative pattern from /playtime, drawn live on a
  * canvas. That's lighter than a video or GIF (no file to download), stays
  * sharp at every screen size, and stops drawing once the screen has slid away.
  */

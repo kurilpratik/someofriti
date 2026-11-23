@@ -14,14 +14,15 @@ export const AUTHOR_NAME = "Riti Wig";
 export const AUTHOR_ROLE = "Senior Graphic Designer & Illustrator";
 export const LOCATION = "New Delhi, India";
 
-/**
- * Social profiles listed in the footer. Placeholder URLs: swap in the real
- * profile links (or remove entries) before launch.
- */
+export const CONTACT_EMAIL = "getstarted@someofriti.com";
+
+/** Social profiles listed in the footer. */
 export const SOCIALS = [
-  { label: "Instagram", href: "https://www.instagram.com/" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/" },
-  { label: "Behance", href: "https://www.behance.net/" },
+  { label: "Instagram", href: "https://www.instagram.com/someofriti" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/riti-wig-11515616b",
+  },
 ] as const;
 
 export const SITE_TITLE = `${SITE_NAME} - ${AUTHOR_NAME}, Senior Graphic Designer in New Delhi`;
