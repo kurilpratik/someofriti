@@ -20,9 +20,9 @@ import {
  * or opt it out with data-cursor="none".
  */
 
-const COLOR = "#ff4800";
+const COLOR = "#ffffff";
 const SIZE = 64; // px (includes goo padding)
-const CYCLE_MS = 450;
+const CYCLE_MS = 600;
 const PAD = 15; // viewBox padding so the goo blur is not clipped
 const MEDIA_SELECTOR = "img, video, picture, svg image, [data-cursor='media']";
 
@@ -276,8 +276,8 @@ export default function MediaCursor() {
                         : { scale: 0, rotate: -60 }
                     }
                     transition={{
-                      scale: { type: "spring", stiffness: 220, damping: 17 },
-                      rotate: { type: "spring", stiffness: 180, damping: 20 },
+                      scale: { type: "spring", stiffness: 160, damping: 16 },
+                      rotate: { type: "spring", stiffness: 130, damping: 18 },
                     }}
                   >
                     {node}
