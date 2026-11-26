@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import CoverScrollAway from "@/components/motion/CoverScrollAway";
 import CoverVideo from "@/components/project/CoverVideo";
-import type { ProjectSummary } from "@/lib/projects";
+import type { ProjectCoverMobile, ProjectSummary } from "@/lib/projects";
 
 /** Reads the framing variables set on the cover box below. */
 const COVER_POSITION = "object-(--cover-pos-mobile) sm:object-(--cover-pos)";
@@ -44,8 +44,9 @@ export default function ProjectSubHero({
     src: project.src,
     alt: project.alt,
   };
-  const position = media.position ?? "50% 50%";
-  const mobile = "mobile" in media ? media.mobile : undefined;
+  const position = ("position" in media && media.position) || "50% 50%";
+  const mobile: ProjectCoverMobile | undefined =
+    "mobile" in media ? media.mobile : undefined;
 
   return (
     <section className="text-brand-ivory bg-black">
@@ -89,7 +90,36 @@ export default function ProjectSubHero({
           } as React.CSSProperties
         }
       >
-        {media.type === "video" && media.sound ? (
+        {media.type === "split" ? (
+          <div className="absolute inset-0 grid grid-cols-2">
+            {[media.left, media.right].map((half) => (
+              <div key={half.src} className="relative overflow-hidden">
+                {half.type === "video" ? (
+                  <video
+                    src={half.src}
+                    aria-label={half.alt}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 size-full object-cover"
+                    style={{ objectPosition: half.position }}
+                  />
+                ) : (
+                  <Image
+                    src={half.src}
+                    alt={half.alt}
+                    fill
+                    priority
+                    sizes="50vw"
+                    className="object-cover"
+                    style={{ objectPosition: half.position }}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        ) : media.type === "video" && media.sound ? (
           <CoverVideo
             src={media.src}
             poster={media.poster}

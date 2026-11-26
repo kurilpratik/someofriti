@@ -10,7 +10,25 @@
  */
 export type ProjectCoverMobile = { aspect?: string; position?: string };
 
+/** One side of a `split` cover. */
+export type ProjectCoverHalf = {
+  type: "image" | "video";
+  src: string;
+  alt: string;
+  position?: string;
+};
+
 export type ProjectCover =
+  | {
+      /**
+       * Two media side by side, each filling half the banner — e.g. a still
+       * on the left and a looping video on the right.
+       */
+      type: "split";
+      left: ProjectCoverHalf;
+      right: ProjectCoverHalf;
+      mobile?: Pick<ProjectCoverMobile, "aspect">;
+    }
   | {
       type: "image";
       src: string;
@@ -174,6 +192,23 @@ export const PROJECTS: ProjectSummary[] = [
     title: "Wallis",
     alt: "Wallis identity — business cards held in hand",
     src: "/images/glance/Asset 6@4x.webp",
+    client: "Wallis",
+    year: "2024-25",
+    workTypes: ["Branding", "Identity", "print"],
+    cover: {
+      type: "split",
+      left: {
+        type: "image",
+        src: "/images/projects/wallis/wallis-header-w.webp",
+        alt: "Wallis W monogram on a patterned white field",
+      },
+      right: {
+        type: "video",
+        src: "/images/projects/wallis/wallis header half.mp4",
+        alt: "The wallis wordmark animating on its construction grid",
+      },
+      mobile: { aspect: "2563/962" },
+    },
   },
   {
     slug: "markers-of-time-and-space",
