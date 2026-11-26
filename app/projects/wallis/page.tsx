@@ -36,8 +36,8 @@ export default function WallisPage() {
         </p>
         <p>
           A lot of emphasis was placed on clarity, restraint, and confidence,
-          keeping the legacy and credibility intact while introducing a
-          fresher, more contemporary lens.
+          keeping the legacy and credibility intact while introducing a fresher,
+          more contemporary lens.
         </p>
         <p>
           The outcome was a considered identity system, backed by a detailed
@@ -183,6 +183,18 @@ export default function WallisPage() {
                 className="aspect-[3/4] w-full object-cover"
               />
             </Reveal>
+          </div>
+
+          <div className="mt-30 sm:mt-42 lg:mt-60">
+            <p className="font-ivy-ora text-[clamp(1.75rem,4.4vw,4rem)] leading-[1.2] font-light text-pretty italic">
+              {/* Line breaks follow the layout on larger screens. */}
+              Visual system that feels <br className="hidden sm:inline" />
+              editorial, flexible, and confident —{" "}
+              <br className="hidden sm:inline" />
+              designed to evolve with the <br className="hidden sm:inline" />
+              agency rather than define <br className="hidden sm:inline" />
+              it narrowly.
+            </p>
           </div>
         </div>
       </section>

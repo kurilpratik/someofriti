@@ -211,6 +211,23 @@ export const PROJECTS: ProjectSummary[] = [
     },
   },
   {
+    slug: "madstarbase",
+    title: "MadStarBase",
+    alt: "MadStarBase wordmark beside the DJ duo on a basketball court, ringed by UFOs and rainbow trails",
+    src: "/images/projects/madstar/madstar-hero.webp",
+    client: "MadStarBase",
+    year: "2024-25",
+    workTypes: ["Branding", "Identity", "print"],
+    cover: {
+      type: "image",
+      src: "/images/projects/madstar/madstar-hero.webp",
+      alt: "MadStarBase wordmark beside the DJ duo on a basketball court, ringed by UFOs and rainbow trails",
+      position: "50% 50%",
+      // A wide banner: phones show it at its own shape, uncropped.
+      mobile: { aspect: "2562/959" },
+    },
+  },
+  {
     slug: "markers-of-time-and-space",
     title: "Markers of Time & Space",
     alt: "Markers of Time and Space — textile artwork",
