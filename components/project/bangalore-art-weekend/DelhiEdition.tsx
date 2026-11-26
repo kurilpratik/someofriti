@@ -35,7 +35,8 @@ export default function DelhiEdition() {
                 rather than letting it wrap, so the shape holds at every width. */}
             <p
               aria-hidden="true"
-              className="font-ivy-ora text-[clamp(2.5rem,6vw,5.25rem)] leading-[1.05] font-light italic"
+              // Deck: 41.6pt leading on 48pt type (0.867), tracking -19 (-0.019em).
+              className="font-ivy-ora text-[clamp(2.5rem,6vw,5.25rem)] leading-[0.867] font-light tracking-[-0.019em] italic"
             >
               <span className="block whitespace-nowrap">For</span>
               <span className="block whitespace-nowrap">the Delhi</span>

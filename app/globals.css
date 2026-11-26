@@ -20,8 +20,10 @@
    * offset below. Update these if the navbar padding or logo size changes.
    */
   --nav-height: 5rem;
-  /* Degular comes from the Adobe Fonts stylesheet linked in app/layout.tsx. */
+  /* Degular and Ivy Ora come from the Adobe Fonts stylesheet linked in app/layout.tsx. */
   --font-degular: "degular-variable", Arial, sans-serif;
+  /* Also set in @theme below; PatternCanvas reads this one at runtime. */
+  --font-ivy-ora: "ivyora-display", Georgia, serif;
   /* Extra letter spacing for the Degular body font. */
   --degular-tracking: 0.02em;
   /*
@@ -50,7 +52,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   /* fonts  */
-  --font-ivy-ora: var(--font-ivy-ora);
+  --font-ivy-ora: "ivyora-display", Georgia, serif;
   --font-degular: var(--font-degular);
 }
 

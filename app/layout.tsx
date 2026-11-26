@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 
 import {
   AUTHOR_NAME,
@@ -13,29 +12,6 @@ import {
 import MediaCursor from "@/components/MediaCursor";
 
 import "./globals.css";
-
-const ivyOraDisplay = localFont({
-  src: [
-    {
-      path: "../public/fonts/Ivy-Ora-Display/Ivy-Ora-Display-Light.otf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Ivy-Ora-Display/Ivy-Ora-Display-.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Ivy-Ora-Display/Ivy-Ora-Display-Medium.otf",
-      weight: "500",
-      style: "normal",
-    },
-  ],
-  variable: "--font-ivy-ora",
-  display: "swap",
-  fallback: ["Georgia", "serif"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -105,10 +81,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${ivyOraDisplay.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <head>
-        {/* Degular is served from Adobe Fonts (family "degular-variable", weights 200-800). */}
+        {/* Adobe Fonts kit: Degular ("degular-variable", 200-800) and Ivy Ora ("ivyora-display", 100-700, upright + italic). */}
         <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
         <link rel="stylesheet" href="https://use.typekit.net/exs8xre.css" />
       </head>

@@ -33,7 +33,7 @@ export default function AboutIntro() {
   return (
     <section className="text-brand-ivory flex min-h-[calc(100svh-var(--nav-height))] flex-col overflow-x-clip bg-black">
       <div className="page-container flex flex-1 flex-col pt-8 pb-8 sm:pt-10 lg:pt-12">
-        <h1 className="font-ivy-ora text-[clamp(3.25rem,9vw,8rem)] leading-[0.95] font-light italic">
+        <h1 className="font-ivy-ora text-[clamp(3.25rem,9vw,8rem)] leading-[0.95] font-normal italic">
           Hello.
         </h1>
 

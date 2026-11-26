@@ -26,7 +26,7 @@ export default function HirePage() {
       <main className="text-brand-ivory min-h-[calc(100svh-var(--nav-height))] bg-black">
         <div className="page-container pt-8 pb-24 sm:pt-10 lg:pt-12 lg:pb-32">
           <Reveal>
-            <h1 className="font-ivy-ora text-[clamp(3.25rem,9vw,8rem)] leading-[0.95] font-light italic">
+            <h1 className="font-ivy-ora text-[clamp(3.25rem,9vw,8rem)] leading-[0.95] font-normal italic">
               Let’s talk.
             </h1>
           </Reveal>
