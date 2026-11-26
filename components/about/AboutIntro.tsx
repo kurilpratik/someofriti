@@ -1,6 +1,24 @@
 import Image from "next/image";
 
 /**
+ * Star placements over the portrait, as percentages of the 1561×692 frame.
+ * Each box is the full icon.png canvas (the star fills ~90% of it), so `left`
+ * and `top` are the box's corner, not the star's tip. Tweak these to nudge.
+ * `spin` is the hover turn — neighbours go opposite ways so they read as a
+ * group rather than one rigid pattern.
+ */
+const STARS = [
+  // Large star breaking out of the top edge, over the hedge.
+  { left: "44.7%", top: "0.6%", width: "27.4%", rotate: "0deg", spin: "group-hover:rotate-180" },
+  // Beside her hair on the left.
+  { left: "1.7%", top: "42.2%", width: "10%", rotate: "-8deg", spin: "group-hover:-rotate-180" },
+  // Peeking up from the bottom edge, cut off by the frame.
+  { left: "28.5%", top: "85%", width: "8.5%", rotate: "6deg", spin: "group-hover:rotate-180" },
+  // Small one on the right edge, half off the photo.
+  { left: "92.6%", top: "56.4%", width: "7.7%", rotate: "0deg", spin: "group-hover:-rotate-180" },
+];
+
+/**
  * The whole of /about: the oversized "Hello.", two columns of copy that sit
  * indented from the left edge, the portrait with its red stars, and the
  * section label pinned to the bottom of the viewport.
@@ -61,30 +79,57 @@ export default function AboutIntro() {
             </p>
 
             {/*
-              The stars and the transparent space above the photo are baked into
-              the asset, so it is placed whole — no crop, no fixed aspect box —
-              and the wordmark is laid over its bottom-right corner. It runs
-              past the container to the right edge of the screen.
+              A 1561×692 frame: the photo sits in its lower-left with headroom
+              above, and the stars are laid over it by percentage so they scale
+              with the frame. `overflow-hidden` trims the star that sinks past
+              the photo's bottom edge. The wordmark sits over the bottom-right
+              corner, and the frame runs past the container to the screen edge.
             */}
-            <div className="bleed-right relative mt-10 w-auto lg:mt-auto lg:pt-14">
-              <Image
-                src="/images/about.webp"
-                alt="Riti Wig outdoors, resting her chin on her hand in front of a hedgerow"
-                width={1561}
-                height={692}
-                priority
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                className="h-auto w-full"
-              />
+            <div className="bleed-right mt-10 w-auto lg:mt-auto lg:pt-14">
+              <div className="group relative aspect-[1561/692] w-full overflow-hidden">
+                <Image
+                  src="/images/about-raw.jpg"
+                  alt="Riti Wig outdoors, resting her chin on her hand in front of a hedgerow"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="!top-[27.02%] !h-[72.98%] !w-[96.86%] object-cover object-left"
+                />
 
-              <Image
-                src="/images/logo/someofriti-logo.png"
-                alt=""
-                aria-hidden="true"
-                width={260}
-                height={80}
-                className="absolute right-[6%] bottom-[5%] h-auto w-[24%] max-w-[120px]"
-              />
+                {/* The span holds the resting tilt; the image inside spins on
+                    hover, so the two rotations don't fight over `rotate`. */}
+                {STARS.map((star) => (
+                  <span
+                    key={`${star.left}-${star.top}`}
+                    aria-hidden="true"
+                    className="pointer-events-none absolute"
+                    style={{
+                      left: star.left,
+                      top: star.top,
+                      width: star.width,
+                      rotate: star.rotate,
+                    }}
+                  >
+                    <Image
+                      src="/images/logo/icon.png"
+                      alt=""
+                      width={499}
+                      height={499}
+                      sizes="(max-width: 1024px) 30vw, 12vw"
+                      className={`block h-auto w-full transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${star.spin}`}
+                    />
+                  </span>
+                ))}
+
+                <Image
+                  src="/images/logo/someofriti-logo.png"
+                  alt=""
+                  aria-hidden="true"
+                  width={260}
+                  height={80}
+                  className="absolute right-[6%] bottom-[5%] h-auto w-[24%] max-w-[120px]"
+                />
+              </div>
             </div>
           </div>
         </div>
