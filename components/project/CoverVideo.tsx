@@ -54,6 +54,11 @@ export default function CoverVideo({
 
     return () => {
       cancelled = true;
+      // With cacheComponents, Next keeps a left route mounted in a hidden
+      // <Activity> instead of unmounting it, so the video would keep playing
+      // (and be heard) on the next page. Effects do clean up on hide, so stop
+      // it here; the effect runs again if the viewer comes back.
+      video.pause();
     };
   }, []);
 
