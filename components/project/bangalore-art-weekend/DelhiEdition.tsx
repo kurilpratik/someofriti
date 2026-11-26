@@ -30,22 +30,23 @@ export default function DelhiEdition() {
             />
           </Reveal>
 
-          <div className="mt-24 grid gap-y-12 sm:mt-30 lg:mt-42 lg:grid-cols-[32%_59%] lg:justify-between lg:gap-y-0">
+          <div className="mt-24 grid gap-y-12 sm:mt-30 lg:mt-42 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-x-[clamp(4rem,6vw,7.5rem)] lg:gap-y-0">
             {/* The deck breaks this line in three; keeping the breaks explicit
                 rather than letting it wrap, so the shape holds at every width. */}
             <p
               aria-hidden="true"
-              className="font-ivy-ora text-[clamp(2.75rem,7.25vw,6.5rem)] leading-[1.05] font-light italic"
+              className="font-ivy-ora text-[clamp(2.5rem,6vw,5.25rem)] leading-[1.05] font-light italic"
             >
               <span className="block whitespace-nowrap">For</span>
               <span className="block whitespace-nowrap">the Delhi</span>
               <span className="block whitespace-nowrap">edition</span>
             </p>
 
-            {/* Capped at a 52-character measure, then pushed to the end of its
-                column so the copy's right edge lands on the poster grid's. */}
+            {/* Capped at a 46-character measure, then pushed to the end of its
+                column so the copy's right edge lands on the poster grid's and
+                the display line gets more room on the left. */}
             <div className="self-center">
-              <div className="text-[1rem] leading-[1.8] tracking-[0.04em] text-pretty sm:text-[1.05rem] lg:ml-auto lg:max-w-[52ch] lg:text-[1.15rem] xl:text-[1.25rem]">
+              <div className="text-[0.95rem] leading-[1.8] tracking-[0.04em] text-pretty sm:text-[1rem] lg:ml-auto lg:max-w-[46ch] lg:text-[1.05rem] xl:text-[1.125rem]">
                 <p>
                   <span className="sr-only">For the Delhi edition: </span>I led
                   the design of the main posters, adapting the existing visual

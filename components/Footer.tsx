@@ -13,7 +13,7 @@ const pageLinks = [
   { label: "Projects", href: "/#projects" },
   { label: "Services", href: "/#services" },
   { label: "Who is this?", href: "/about" },
-  { label: "Hire", href: "/#hire" },
+  { label: "Hire", href: "/hire" },
   { label: "Playtime", href: "/playtime" },
 ];
 
