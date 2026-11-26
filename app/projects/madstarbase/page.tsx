@@ -203,7 +203,7 @@ export default function MadStarBasePage() {
               {/* Same four lines on every screen: the breaks are fixed and the
                   type is sized to the column (cqi), so it scales as one block. */}
               <Reveal className="@container flex items-center sm:col-start-1">
-                <p className="font-ivy-ora text-[15.1cqi] leading-[1.03] font-light whitespace-nowrap">
+                <p className="font-ivy-ora text-[15.1cqi] leading-[1.03] font-light whitespace-nowrap italic">
                   Artworks are
                   <br />
                   clickable, for mid
@@ -235,7 +235,7 @@ export default function MadStarBasePage() {
                 />
               </Reveal>
               <Reveal delay={REVEAL.stagger}>
-                <h2 className="text-[10.5cqi] leading-none font-light whitespace-nowrap sm:text-[5.4cqi]">
+                <h2 className="text-[10.5cqi] leading-none font-light whitespace-nowrap italic sm:text-[5.4cqi]">
                   Moment(s) of fame.
                 </h2>
               </Reveal>

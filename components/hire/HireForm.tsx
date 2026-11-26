@@ -3,6 +3,7 @@
 import {
   useActionState,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type ChangeEvent,
@@ -42,6 +43,15 @@ const errorId = (field: HireField) => `hire-${field}-error`;
 */
 const blankClass =
   "font-ivy-ora min-w-0 appearance-none rounded-none bg-transparent p-0 font-light text-brand-ivory shadow-[inset_0_-1px_0_rgb(245_241_234/0.4)] transition-shadow duration-200 outline-none placeholder:text-[#f5f1ea]/40 hover:shadow-[inset_0_-1px_0_rgb(245_241_234/0.8)] focus:shadow-[inset_0_-2px_0_var(--brand-red)] aria-invalid:shadow-[inset_0_-2px_0_var(--brand-red)] motion-reduce:transition-none";
+
+/*
+  The note draws its underline as a background rather than blankClass's inset
+  shadow, so that while it's a single line the rule can start where its text
+  does (after "One more thing:") instead of at the left edge. Same colours and
+  thicknesses as the other blanks, via --line and --line-w.
+*/
+const noteClass =
+  "font-ivy-ora min-w-0 appearance-none rounded-none bg-transparent bg-no-repeat bg-right-bottom p-0 font-light text-brand-ivory [--line-w:1px] [--line:rgb(245_241_234/0.4)] hover:[--line:rgb(245_241_234/0.8)] focus:[--line-w:2px] focus:[--line:var(--brand-red)] aria-invalid:[--line-w:2px] aria-invalid:[--line:var(--brand-red)] outline-none placeholder:text-[#f5f1ea]/40";
 
 type BlankProps = {
   field: HireField;
@@ -111,6 +121,14 @@ export default function HireForm() {
   const [errors, setErrors] = useState<HireErrors>({});
   const successRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
+  const sentenceRef = useRef<HTMLParagraphElement>(null);
+  const sentenceEndRef = useRef<HTMLSpanElement>(null);
+  // How far "One more thing:" runs into its line, so the note can pick up
+  // right after it. null means there's no room and the note takes a new line.
+  const [noteIndent, setNoteIndent] = useState<number | null>(null);
+  const noteRef = useRef<HTMLTextAreaElement>(null);
+  // Whether the note (or its placeholder) has wrapped past its first line.
+  const [noteWrapped, setNoteWrapped] = useState(false);
 
   // Wrapping the action lets the server's field errors land in the same
   // `errors` state the browser checks fill, so both show the same way.
@@ -124,6 +142,49 @@ export default function HireForm() {
     },
     { status: "idle" } as HireState,
   );
+
+  // The blanks above grow as they're filled, which moves where the sentence
+  // ends, so this re-measures on every change as well as on resize.
+  useLayoutEffect(() => {
+    const sentence = sentenceRef.current;
+    const end = sentenceEndRef.current;
+
+    if (!sentence || !end) return;
+
+    // offsetLeft (the sentence is the offset parent) ignores the reveal
+    // animation's transform, which getBoundingClientRect would pick up.
+    const measure = () => {
+      const offset = end.offsetLeft;
+      const fontSize = parseFloat(getComputedStyle(sentence).fontSize);
+
+      // Leave at least ~8em for the note before it's worth starting there.
+      setNoteIndent(
+        sentence.clientWidth - offset > fontSize * 8 ? offset : null,
+      );
+
+      const note = noteRef.current;
+
+      if (note) {
+        const lineHeight = parseFloat(getComputedStyle(note).lineHeight);
+        setNoteWrapped(note.clientHeight > lineHeight * 1.5);
+      }
+    };
+
+    measure();
+
+    const observer = new ResizeObserver(measure);
+    observer.observe(sentence);
+
+    // Ivy Ora arrives from Adobe Fonts after first paint and sets narrower
+    // than the fallback, which moves the sentence's end without a resize.
+    document.fonts.ready.then(measure);
+    document.fonts.addEventListener("loadingdone", measure);
+
+    return () => {
+      observer.disconnect();
+      document.fonts.removeEventListener("loadingdone", measure);
+    };
+  }, [values, state.status]);
 
   useEffect(() => {
     if (state.status === "success") successRef.current?.focus();
@@ -169,7 +230,7 @@ export default function HireForm() {
         role="status"
         className="outline-none"
       >
-        <p className="font-ivy-ora text-[clamp(1.6rem,3vw,2.75rem)] leading-[1.35] font-light">
+        <p className="font-ivy-ora text-[clamp(1.15rem,1.9vw,1.75rem)] leading-[1.35] font-light">
           Thank you{state.name ? `, ${state.name}` : ""}. It’s on its way to me,
           and I’ll reply within a few days.
         </p>
@@ -200,8 +261,13 @@ export default function HireForm() {
         The sentence. Every blank has a real (visually hidden) label, so a
         screen reader announces "Your name, edit text" rather than just the
         placeholder. `text-pretty` keeps the ragged edge even as blanks grow.
+        The note below is pulled up onto the last line, under this paragraph,
+        so the paragraph lets clicks through to it and only its inputs take them.
       */}
-      <p className="font-ivy-ora text-[clamp(1.6rem,3vw,2.75rem)] leading-[1.6] font-light text-pretty">
+      <p
+        ref={sentenceRef}
+        className="font-ivy-ora pointer-events-none relative text-[clamp(1.15rem,1.9vw,1.75rem)] leading-[1.6] font-light text-pretty [&_input]:pointer-events-auto"
+      >
         Hi Riti, my name is{" "}
         <Blank
           {...blank}
@@ -267,21 +333,38 @@ export default function HireForm() {
           error={errors.email}
         />
         . One more thing:
+        <span ref={sentenceEndRef} aria-hidden="true" />
       </p>
 
-      {/* The open-ended note gets a full line of its own and grows downwards
-          (`field-sizing: content`; `rows` is the floor where that isn't supported). */}
+      {/* The open-ended note carries on from "One more thing:": it's pulled up
+          onto the sentence's last line and its first line is indented past
+          the text, then it grows downwards (`field-sizing: content`; `rows`
+          is the floor where that isn't supported). */}
       <label htmlFor={fieldId("message")} className="sr-only">
         Anything else you’d like to tell me (optional)
       </label>
       <textarea
         id={fieldId("message")}
         name="message"
+        ref={noteRef}
         rows={2}
+        style={{
+          backgroundImage: "linear-gradient(var(--line), var(--line))",
+          // One line: the rule runs from the note's first word to the edge.
+          // Wrapped: it runs the full width under the last line.
+          backgroundSize:
+            noteIndent === null || noteWrapped
+              ? "100% var(--line-w)"
+              : `calc(100% - ${noteIndent}px - 0.3em) var(--line-w)`,
+          ...(noteIndent !== null && {
+            marginTop: "-1lh",
+            textIndent: `calc(${noteIndent}px + 0.3em)`,
+          }),
+        }}
         value={values.message}
         onChange={(event) => update("message", event.target.value)}
         placeholder="tell me a little more about the project, if you like."
-        className={`${blankClass} mt-2 block [field-sizing:content] w-full resize-none text-[clamp(1.6rem,3vw,2.75rem)] leading-[1.6]`}
+        className={`${noteClass} mt-2 block [field-sizing:content] w-full resize-none text-[clamp(1.15rem,1.9vw,1.75rem)] leading-[1.6]`}
       />
 
       {/* Bots fill in every field they find; people never see this one. */}

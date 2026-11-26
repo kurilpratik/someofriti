@@ -8,7 +8,7 @@ import type { ProjectCoverMobile, ProjectSummary } from "@/lib/projects";
 const COVER_POSITION = "object-(--cover-pos-mobile) sm:object-(--cover-pos)";
 
 const LABEL =
-  "text-[0.75rem] font-medium tracking-[0.2em] uppercase sm:text-[0.8rem]";
+  "text-[0.8125rem] leading-[1.2] font-light tracking-[0.08em] uppercase sm:text-[0.875rem]";
 
 function Detail({
   label,
@@ -22,7 +22,7 @@ function Detail({
   return (
     <div className={className}>
       <dt className={LABEL}>{label}</dt>
-      <dd className="font-ivy-ora mt-3 max-w-[14em] text-[1.4rem] leading-[1.2] font-light text-balance sm:text-[1.7rem] lg:text-[2rem]">
+      <dd className="font-ivy-ora mt-6 max-w-[14em] text-[1.4rem] leading-[1.2] font-normal tracking-[-0.021em] text-balance italic sm:text-[1.7rem] lg:text-[2rem]">
         {children}
       </dd>
     </div>

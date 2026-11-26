@@ -353,7 +353,7 @@ export default function ProjectsAtAGlance() {
       {/* Same container as the navbar so both line up edge to edge. */}
       <div className="page-container">
         <header className="flex w-full flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <h2 className="text-[clamp(2rem,4vw,3.4rem)] leading-[1.05] font-light tracking-tight">
+          <h2 className="text-[clamp(2rem,4vw,3.4rem)] leading-[1.05] font-light tracking-tight italic">
             Projects at a glance
           </h2>
         </header>

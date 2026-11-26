@@ -44,7 +44,7 @@ export default function NextProject({ slug }: { slug: string }) {
               </p>
 
               <div className="mt-5">
-                <h2 className="text-[clamp(1.8rem,4vw,3.4rem)] leading-[1.08] font-light tracking-tight">
+                <h2 className="text-[clamp(1.8rem,4vw,3.4rem)] leading-[1.08] font-light tracking-tight italic">
                   {next.title}
                 </h2>
               </div>
