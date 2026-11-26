@@ -46,7 +46,7 @@ export default function DelhiEdition() {
                 column so the copy's right edge lands on the poster grid's and
                 the display line gets more room on the left. */}
             <div className="self-center">
-              <div className="text-[0.95rem] leading-[1.8] tracking-[0.04em] text-pretty sm:text-[1rem] lg:ml-auto lg:max-w-[46ch] lg:text-[1.05rem] xl:text-[1.125rem]">
+              <div className="body-copy text-[0.95rem] text-pretty sm:text-[1rem] lg:ml-auto lg:max-w-[46ch] lg:text-[1.05rem] xl:text-[1.125rem]">
                 <p>
                   <span className="sr-only">For the Delhi edition: </span>I led
                   the design of the main posters, adapting the existing visual

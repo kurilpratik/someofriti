@@ -93,7 +93,7 @@ export default function RegaliumPage() {
 
           {/* Same body type as the page intro. */}
           <div className="mt-18 sm:mt-24 lg:mt-36">
-            <p className="w-full text-[1rem] leading-[1.8] tracking-[0.04em] text-pretty sm:text-[1.05rem] lg:text-[1.15rem] xl:text-[1.25rem]">
+            <p className="body-copy w-full text-[1rem] text-pretty sm:text-[1.05rem] lg:text-[1.15rem] xl:text-[1.25rem]">
               My work extended across the brand’s visual applications, from
               campaign art direction and editorial layouts to print, digital
               communication and environmental graphics. The challenge was to

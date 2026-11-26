@@ -70,7 +70,7 @@ export default function HangingGardens() {
             </div>
           </Reveal>
 
-          <p className="text-[0.95rem] leading-[1.55] font-light tracking-[0.01em] text-pretty sm:text-[1rem] lg:text-[1.05rem]">
+          <p className="body-copy text-[0.95rem] font-light text-pretty sm:text-[1rem] lg:text-[1.05rem]">
             {COPY}
           </p>
         </div>

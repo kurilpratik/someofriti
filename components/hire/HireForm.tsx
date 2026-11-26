@@ -376,7 +376,7 @@ export default function HireForm() {
 
         <p
           id="hire-required-note"
-          className="text-[0.85rem] leading-[1.6] text-[#f5f1ea]/60"
+          className="body-copy text-[0.85rem] text-[#f5f1ea]/60"
         >
           Only your name, what you need and an email are required.
           <br />

@@ -275,7 +275,7 @@ export default function MadStarBasePage() {
 
             {/* Same body type as the page intro. */}
             <Reveal>
-              <p className="w-full text-[1rem] leading-[1.8] tracking-[0.04em] text-pretty sm:text-[1.05rem] lg:text-[1.15rem] xl:text-[1.25rem]">
+              <p className="body-copy w-full text-[1rem] text-pretty sm:text-[1.05rem] lg:text-[1.15rem] xl:text-[1.25rem]">
                 Following the success of the first release, Mollywood 2.0
                 expanded the visual language, increasing density, colour
                 intensity, and compositional play while retaining recognisable
@@ -303,7 +303,7 @@ export default function MadStarBasePage() {
                 className="mx-auto w-full max-w-[24rem] sm:max-w-none"
               />
               <Reveal delay={REVEAL.stagger}>
-                <div className="text-[1rem] leading-[1.65] tracking-[0.04em] text-pretty lg:text-[1.05rem] xl:text-[1.15rem] [&>p+p]:mt-[1.4em]">
+                <div className="body-copy text-[1rem] text-pretty lg:text-[1.05rem] xl:text-[1.15rem] [&>p+p]:mt-[1.4em]">
                   <p>
                     For me, this project was an exercise in controlled chaos.
                     The visual language was deliberately fluid, allowing

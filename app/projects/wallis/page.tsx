@@ -132,7 +132,7 @@ export default function WallisPage() {
 
           {/* Same body type as the page intro. */}
           <div className="mt-24 sm:mt-36 lg:mt-48">
-            <p className="w-full text-[1rem] leading-[1.8] tracking-[0.04em] text-pretty sm:text-[1.05rem] lg:text-[1.15rem] xl:text-[1.25rem]">
+            <p className="body-copy w-full text-[1rem] text-pretty sm:text-[1.05rem] lg:text-[1.15rem] xl:text-[1.25rem]">
               The Wallis identity system was built as a set of modular parts —
               colours and symbols that adapt across sectors while maintaining a
               consistent tone. Bold yet controlled colour pairings bring

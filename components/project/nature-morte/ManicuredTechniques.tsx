@@ -103,7 +103,7 @@ export default function ManicuredTechniques() {
         {/* Closing copy. One run of text that splits into two balanced columns
             on large screens, the way the intro under the sub-hero does. */}
         <div className="mt-24 lg:mt-36">
-          <div className="text-[1.05rem] leading-[1.85] font-normal tracking-[0.045em] text-pretty sm:text-[1.15rem] lg:columns-2 lg:gap-x-20 lg:text-[1.2rem]">
+          <div className="body-copy text-[1.05rem] font-normal text-pretty sm:text-[1.15rem] lg:columns-2 lg:gap-x-20 lg:text-[1.2rem]">
             <p>
               The final mark was built as a structured framework rather than a
               fixed logo, allowing it to adapt naturally across spatial and

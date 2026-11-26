@@ -43,7 +43,7 @@ export default async function Footer() {
             <p className="font-ivy-ora text-[clamp(2rem,4vw,3rem)] leading-[1.05] font-light italic">
               {AUTHOR_NAME}
             </p>
-            <p className="mt-3 max-w-[18rem] text-[0.95rem] leading-[1.6] text-[#f5f1ea]/60">
+            <p className="body-copy mt-3 max-w-[18rem] text-[0.95rem] text-[#f5f1ea]/60">
               {AUTHOR_ROLE}, based in {LOCATION}.
             </p>
             {/* On hover the underline gives way to the same hand-drawn red

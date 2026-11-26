@@ -42,7 +42,7 @@ export default function AboutIntro() {
           copy starts roughly a quarter of the way across, leaving the "Hello."
           alone above it. Below `lg` it is a single stacked column.
         */}
-        <div className="mt-8 grid gap-x-12 gap-y-10 text-[0.95rem] leading-[1.7] tracking-[0.03em] text-pretty sm:text-[1rem] lg:mt-10 lg:ml-[22%] lg:grid-cols-2 lg:gap-x-14 lg:text-[1.05rem] xl:gap-x-20 [&_p+p]:mt-[1.5em]">
+        <div className="body-copy mt-8 grid gap-x-12 gap-y-10 text-[0.95rem] text-pretty sm:text-[1rem] lg:mt-10 lg:ml-[22%] lg:grid-cols-2 lg:gap-x-14 lg:text-[1.05rem] xl:gap-x-20 [&_p+p]:mt-[1.5em]">
           <div>
             <p>
               I’m a designer working across identity, systems, and brand

@@ -449,7 +449,7 @@ export default function ProjectsAtAGlance() {
             className="**:[[role=slider]]:bg-brand-primary **:[[role=slider]]:ring-brand-primary/30 [&>div:first-of-type]:bg-brand-primary/45 h-9 **:[[role=slider]]:h-4.5"
           />
 
-          <p className="text-muted-foreground text-center text-[0.85rem] leading-relaxed">
+          <p className="body-copy text-muted-foreground text-center text-[0.85rem]">
             Control the slider to go from structure to creative!
           </p>
         </div>

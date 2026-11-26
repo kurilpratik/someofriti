@@ -135,7 +135,7 @@ export default function ProjectIntro({ children }: { children: ReactNode }) {
     <section className="text-brand-ivory relative z-10">
       <div className="page-container">
         <div className="bg-black px-6 pt-18 pb-24 sm:px-10 sm:pt-21 sm:pb-36 lg:px-16">
-          <div className="text-[1rem] leading-[1.8] tracking-[0.04em] text-pretty sm:columns-2 sm:gap-x-10 sm:text-[1.05rem] lg:gap-x-16 lg:text-[1.15rem] xl:text-[1.25rem] [&>p+p]:mt-[1.8em]">
+          <div className="body-copy text-[1rem] text-pretty sm:columns-2 sm:gap-x-10 sm:text-[1.05rem] lg:gap-x-16 lg:text-[1.15rem] xl:text-[1.25rem] [&>p+p]:mt-[1.8em]">
             {toParagraphs(children).map(({ nodes, startsColumn }, i) => (
               <p
                 key={i}

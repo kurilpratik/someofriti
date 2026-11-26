@@ -20,8 +20,17 @@
    * offset below. Update these if the navbar padding or logo size changes.
    */
   --nav-height: 5rem;
+  /* Degular comes from the Adobe Fonts stylesheet linked in app/layout.tsx. */
+  --font-degular: "degular-variable", Arial, sans-serif;
   /* Extra letter spacing for the Degular body font. */
   --degular-tracking: 0.02em;
+  /*
+   * Degular paragraph spacing (the body-copy utility). From the design: 14pt
+   * leading on 10pt type = 1.4, and tracking 80 = 0.08em. Both scale with the
+   * font size.
+   */
+  --degular-leading: 1.4;
+  --degular-paragraph-tracking: 0.08em;
 }
 
 @theme inline {
@@ -124,6 +133,12 @@ h1,
 h2,
 h3 {
   @apply font-ivy-ora;
+}
+
+/* Line height and letter spacing for Degular paragraphs. */
+@utility body-copy {
+  line-height: var(--degular-leading);
+  letter-spacing: var(--degular-paragraph-tracking);
 }
 
 /*

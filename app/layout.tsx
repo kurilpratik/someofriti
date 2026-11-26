@@ -37,13 +37,6 @@ const ivyOraDisplay = localFont({
   fallback: ["Georgia", "serif"],
 });
 
-const degular = localFont({
-  src: "../public/fonts/Degular/Degular_Variable.otf",
-  variable: "--font-degular",
-  display: "swap",
-  fallback: ["Arial", "sans-serif"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -112,8 +105,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${ivyOraDisplay.variable} ${degular.variable} h-full antialiased`}
+      className={`${ivyOraDisplay.variable} h-full antialiased`}
     >
+      <head>
+        {/* Degular is served from Adobe Fonts (family "degular-variable", weights 200-800). */}
+        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
+        <link rel="stylesheet" href="https://use.typekit.net/exs8xre.css" />
+      </head>
       <body className="flex min-h-full flex-col bg-slate-100 text-slate-900">
         {children}
         <MediaCursor />
