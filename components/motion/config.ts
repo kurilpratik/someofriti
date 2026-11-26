@@ -35,6 +35,20 @@ export const PARALLAX_DEPTH = {
   far: 150,
 } as const;
 
+/**
+ * The same depths below the `lg` breakpoint, where the collages collapse into
+ * stacks with gaps as small as 24px. Two neighbours can close in on each other
+ * by the sum of their depths, so keep any two under that gap.
+ */
+export const PARALLAX_DEPTH_MOBILE = {
+  near: -5,
+  mid: 8,
+  far: 10,
+} as const;
+
+/** Viewports narrower than this use `PARALLAX_DEPTH_MOBILE` (Tailwind's `lg`). */
+export const PARALLAX_DESKTOP_QUERY = "(min-width: 64rem)";
+
 export type ParallaxDepth = keyof typeof PARALLAX_DEPTH;
 
 /** The cover under the sub-hero, as the intro slides up over it. */
