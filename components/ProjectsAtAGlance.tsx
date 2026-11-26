@@ -87,8 +87,8 @@ const LAYOUT: Record<string, Layout> = {
     phase: 0.63,
     size: 0.18,
   },
-  tanabana: {
-    aspect: 489 / 733,
+  madstarbase: {
+    aspect: 1,
     grid: { col: 2, row: 2, colSpan: 1, rowSpan: 1 },
     ring: 0,
     phase: 0.75,
@@ -124,8 +124,16 @@ const COMPACT_BREAKPOINT = 640;
 const COLS = 4;
 const COMPACT_COLS = 2;
 
-/** Relative row heights. The bottom row holds the tall posters, so it gets more. */
-const ROW_WEIGHTS = [1, 1, 1.3];
+/**
+ * Row heights in px for the desktop grid: the bottom row is as tall as a column
+ * is wide, so its single-column tiles are square; the top two rows split the rest.
+ */
+function desktopRowWeights(width: number, height: number, gap: number) {
+  const cellW = (width - gap * (COLS - 1)) / COLS;
+  const rest = Math.max(0, (height - gap * 2 - cellW) / 2);
+
+  return [rest, rest, cellW];
+}
 const COMPACT_ROW_WEIGHTS = [1, 1, 1, 1];
 
 /**
@@ -229,8 +237,10 @@ function layoutCards(
   const amount = smoothstep(mix);
   const compact = width < COMPACT_BREAKPOINT;
   const cols = compact ? COMPACT_COLS : COLS;
-  const rowWeights = compact ? COMPACT_ROW_WEIGHTS : ROW_WEIGHTS;
   const gap = compact ? 10 : 16;
+  const rowWeights = compact
+    ? COMPACT_ROW_WEIGHTS
+    : desktopRowWeights(width, height, gap);
 
   // Orbit area: a fixed-ratio band at the bottom of the (taller) stage.
   const orbitHeight = Math.min(
