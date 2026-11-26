@@ -8,7 +8,7 @@ import NavHeightSync from "@/components/NavHeightSync";
 
 const navItems = [
   { label: "Projects", href: "/#projects" },
-  { label: "Services", href: "/#services" },
+  { label: "Services", href: "/about#services" },
   { label: "Who is this?", href: "/about" },
   { label: "Hire", href: "/hire" },
 ];
@@ -19,9 +19,18 @@ function handleSmoothAnchorClick(
   event: React.MouseEvent<HTMLAnchorElement>,
   href: string,
 ) {
-  if (!href.startsWith("#")) return;
+  // Smooth-scroll only when the link points at a section on the page we're
+  // already on (e.g. `/about#services` while on /about); anything else is a
+  // normal navigation.
+  const hashIndex = href.indexOf("#");
 
-  const target = document.getElementById(href.slice(1));
+  if (hashIndex === -1) return;
+
+  const path = href.slice(0, hashIndex);
+
+  if (path && path !== window.location.pathname) return;
+
+  const target = document.getElementById(href.slice(hashIndex + 1));
 
   if (!target) return;
 

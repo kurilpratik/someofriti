@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import AboutIntro from "@/components/about/AboutIntro";
+import Services from "@/components/about/Services";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { pageMetadata } from "@/lib/site";
@@ -17,6 +18,7 @@ export default function AboutPage() {
     <>
       <Navbar />
       <AboutIntro />
+      <Services />
       <Footer />
     </>
   );
